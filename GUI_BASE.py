@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'GUI_BASEUTUxzq.ui'
+## Form generated from reading UI file 'GUI_BASEfquJtV.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -771,71 +771,88 @@ class Ui_MainWindow(object):
 "	border: 2px solid rgb(43, 50, 61);\n"
 "}\n"
 "")
+        self.horizontalLayout_19 = QHBoxLayout(self.page_device)
+        self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
+        self.verticalLayout_13 = QVBoxLayout()
+        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
+        self.verticalLayout_13.setSizeConstraint(QLayout.SetDefaultConstraint)
         self.frame_4 = QFrame(self.page_device)
         self.frame_4.setObjectName(u"frame_4")
-        self.frame_4.setGeometry(QRect(10, 10, 231, 211))
+        sizePolicy5 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.frame_4.sizePolicy().hasHeightForWidth())
+        self.frame_4.setSizePolicy(sizePolicy5)
+        self.frame_4.setMinimumSize(QSize(231, 211))
+        self.frame_4.setMaximumSize(QSize(320, 16777215))
         self.frame_4.setFrameShape(QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QFrame.Raised)
-        self.layoutWidget = QWidget(self.frame_4)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(10, 10, 211, 191))
-        self.verticalLayout_12 = QVBoxLayout(self.layoutWidget)
+        self.horizontalLayout_17 = QHBoxLayout(self.frame_4)
+        self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
+        self.verticalLayout_12 = QVBoxLayout()
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
-        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
         self.formLayout = QFormLayout()
         self.formLayout.setObjectName(u"formLayout")
-        self.DeviceType_lb = QLabel(self.layoutWidget)
+        self.DeviceType_lb = QLabel(self.frame_4)
         self.DeviceType_lb.setObjectName(u"DeviceType_lb")
         self.DeviceType_lb.setFont(font2)
 
         self.formLayout.setWidget(0, QFormLayout.LabelRole, self.DeviceType_lb)
 
-        self.DeviceType_cbb = QComboBox(self.layoutWidget)
+        self.DeviceType_cbb = QComboBox(self.frame_4)
         self.DeviceType_cbb.addItem("")
         self.DeviceType_cbb.addItem("")
         self.DeviceType_cbb.setObjectName(u"DeviceType_cbb")
+        sizePolicy5.setHeightForWidth(self.DeviceType_cbb.sizePolicy().hasHeightForWidth())
+        self.DeviceType_cbb.setSizePolicy(sizePolicy5)
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.DeviceType_cbb)
 
-        self.DeviceIndex_lb = QLabel(self.layoutWidget)
+        self.DeviceIndex_lb = QLabel(self.frame_4)
         self.DeviceIndex_lb.setObjectName(u"DeviceIndex_lb")
         self.DeviceIndex_lb.setFont(font2)
 
         self.formLayout.setWidget(1, QFormLayout.LabelRole, self.DeviceIndex_lb)
 
-        self.DeviceIndex_cbb = QComboBox(self.layoutWidget)
+        self.DeviceIndex_cbb = QComboBox(self.frame_4)
         self.DeviceIndex_cbb.addItem("")
         self.DeviceIndex_cbb.addItem("")
         self.DeviceIndex_cbb.addItem("")
         self.DeviceIndex_cbb.addItem("")
         self.DeviceIndex_cbb.setObjectName(u"DeviceIndex_cbb")
+        sizePolicy5.setHeightForWidth(self.DeviceIndex_cbb.sizePolicy().hasHeightForWidth())
+        self.DeviceIndex_cbb.setSizePolicy(sizePolicy5)
 
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.DeviceIndex_cbb)
 
-        self.Baud_lb = QLabel(self.layoutWidget)
+        self.Baud_lb = QLabel(self.frame_4)
         self.Baud_lb.setObjectName(u"Baud_lb")
         self.Baud_lb.setFont(font2)
 
         self.formLayout.setWidget(2, QFormLayout.LabelRole, self.Baud_lb)
 
-        self.Baud_cbb = QComboBox(self.layoutWidget)
+        self.Baud_cbb = QComboBox(self.frame_4)
         self.Baud_cbb.addItem("")
         self.Baud_cbb.addItem("")
         self.Baud_cbb.setObjectName(u"Baud_cbb")
+        sizePolicy5.setHeightForWidth(self.Baud_cbb.sizePolicy().hasHeightForWidth())
+        self.Baud_cbb.setSizePolicy(sizePolicy5)
 
         self.formLayout.setWidget(2, QFormLayout.FieldRole, self.Baud_cbb)
 
-        self.CanChannel_lb = QLabel(self.layoutWidget)
+        self.CanChannel_lb = QLabel(self.frame_4)
         self.CanChannel_lb.setObjectName(u"CanChannel_lb")
         self.CanChannel_lb.setFont(font2)
 
         self.formLayout.setWidget(3, QFormLayout.LabelRole, self.CanChannel_lb)
 
-        self.CanChannel_cbb = QComboBox(self.layoutWidget)
+        self.CanChannel_cbb = QComboBox(self.frame_4)
         self.CanChannel_cbb.addItem("")
         self.CanChannel_cbb.addItem("")
         self.CanChannel_cbb.addItem("")
         self.CanChannel_cbb.setObjectName(u"CanChannel_cbb")
+        sizePolicy5.setHeightForWidth(self.CanChannel_cbb.sizePolicy().hasHeightForWidth())
+        self.CanChannel_cbb.setSizePolicy(sizePolicy5)
 
         self.formLayout.setWidget(3, QFormLayout.FieldRole, self.CanChannel_cbb)
 
@@ -844,13 +861,13 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_13 = QHBoxLayout()
         self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
-        self.OpenDevice_Btn = QPushButton(self.layoutWidget)
+        self.OpenDevice_Btn = QPushButton(self.frame_4)
         self.OpenDevice_Btn.setObjectName(u"OpenDevice_Btn")
-        sizePolicy5 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        sizePolicy5.setHorizontalStretch(0)
-        sizePolicy5.setVerticalStretch(0)
-        sizePolicy5.setHeightForWidth(self.OpenDevice_Btn.sizePolicy().hasHeightForWidth())
-        self.OpenDevice_Btn.setSizePolicy(sizePolicy5)
+        sizePolicy6 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy6.setHorizontalStretch(0)
+        sizePolicy6.setVerticalStretch(0)
+        sizePolicy6.setHeightForWidth(self.OpenDevice_Btn.sizePolicy().hasHeightForWidth())
+        self.OpenDevice_Btn.setSizePolicy(sizePolicy6)
         self.OpenDevice_Btn.setMinimumSize(QSize(93, 28))
         self.OpenDevice_Btn.setMaximumSize(QSize(93, 28))
 
@@ -859,13 +876,54 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_12.addLayout(self.horizontalLayout_13)
 
+
+        self.horizontalLayout_17.addLayout(self.verticalLayout_12)
+
+
+        self.verticalLayout_13.addWidget(self.frame_4)
+
+        self.horizontalLayout_15 = QHBoxLayout()
+        self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
         self.CanTransClick_Btn = QPushButton(self.page_device)
         self.CanTransClick_Btn.setObjectName(u"CanTransClick_Btn")
-        self.CanTransClick_Btn.setGeometry(QRect(80, 240, 93, 28))
-        sizePolicy5.setHeightForWidth(self.CanTransClick_Btn.sizePolicy().hasHeightForWidth())
-        self.CanTransClick_Btn.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.CanTransClick_Btn.sizePolicy().hasHeightForWidth())
+        self.CanTransClick_Btn.setSizePolicy(sizePolicy6)
         self.CanTransClick_Btn.setMinimumSize(QSize(93, 28))
         self.CanTransClick_Btn.setMaximumSize(QSize(93, 28))
+
+        self.horizontalLayout_15.addWidget(self.CanTransClick_Btn)
+
+
+        self.verticalLayout_13.addLayout(self.horizontalLayout_15)
+
+        self.horizontalLayout_16 = QHBoxLayout()
+        self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
+        self.plainTextEdit_2 = QPlainTextEdit(self.page_device)
+        self.plainTextEdit_2.setObjectName(u"plainTextEdit_2")
+        self.plainTextEdit_2.setMaximumSize(QSize(320, 16777215))
+        self.plainTextEdit_2.setStyleSheet(u"QPlainTextEdit {\n"
+"	background-color: rgb(27, 29, 35);\n"
+"	border-radius: 5px;\n"
+"	padding: 10px;\n"
+"}\n"
+"QPlainTextEdit:hover {\n"
+"	border: 2px solid rgb(64, 71, 88);\n"
+"}\n"
+"QPlainTextEdit:focus {\n"
+"	border: 2px solid rgb(91, 101, 124);\n"
+"}")
+        self.plainTextEdit_2.setReadOnly(True)
+
+        self.horizontalLayout_16.addWidget(self.plainTextEdit_2)
+
+
+        self.verticalLayout_13.addLayout(self.horizontalLayout_16)
+
+
+        self.horizontalLayout_19.addLayout(self.verticalLayout_13)
+
+        self.horizontalLayout_18 = QHBoxLayout()
+        self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
         self.MsgShow_tblw = QTableWidget(self.page_device)
         if (self.MsgShow_tblw.columnCount() < 6):
             self.MsgShow_tblw.setColumnCount(6)
@@ -882,7 +940,8 @@ class Ui_MainWindow(object):
         __qtablewidgetitem5 = QTableWidgetItem()
         self.MsgShow_tblw.setHorizontalHeaderItem(5, __qtablewidgetitem5)
         self.MsgShow_tblw.setObjectName(u"MsgShow_tblw")
-        self.MsgShow_tblw.setGeometry(QRect(260, 10, 621, 571))
+        sizePolicy3.setHeightForWidth(self.MsgShow_tblw.sizePolicy().hasHeightForWidth())
+        self.MsgShow_tblw.setSizePolicy(sizePolicy3)
         self.MsgShow_tblw.setContextMenuPolicy(Qt.CustomContextMenu)
         self.MsgShow_tblw.setStyleSheet(u"QTableWidget {	\n"
 "	background-color: rgb(39, 44, 54);\n"
@@ -950,21 +1009,14 @@ class Ui_MainWindow(object):
         self.MsgShow_tblw.horizontalHeader().setStretchLastSection(True)
         self.MsgShow_tblw.verticalHeader().setVisible(False)
         self.MsgShow_tblw.verticalHeader().setStretchLastSection(False)
-        self.plainTextEdit_2 = QPlainTextEdit(self.page_device)
-        self.plainTextEdit_2.setObjectName(u"plainTextEdit_2")
-        self.plainTextEdit_2.setGeometry(QRect(10, 280, 231, 301))
-        self.plainTextEdit_2.setStyleSheet(u"QPlainTextEdit {\n"
-"	background-color: rgb(27, 29, 35);\n"
-"	border-radius: 5px;\n"
-"	padding: 10px;\n"
-"}\n"
-"QPlainTextEdit:hover {\n"
-"	border: 2px solid rgb(64, 71, 88);\n"
-"}\n"
-"QPlainTextEdit:focus {\n"
-"	border: 2px solid rgb(91, 101, 124);\n"
-"}")
-        self.plainTextEdit_2.setReadOnly(True)
+
+        self.horizontalLayout_18.addWidget(self.MsgShow_tblw)
+
+
+        self.horizontalLayout_19.addLayout(self.horizontalLayout_18)
+
+        self.horizontalLayout_19.setStretch(0, 3)
+        self.horizontalLayout_19.setStretch(1, 9)
         self.stackedWidget.addWidget(self.page_device)
         self.page_panel = QWidget()
         self.page_panel.setObjectName(u"page_panel")
@@ -1207,7 +1259,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 278, 222))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 222, 222))
         self.horizontalLayout_11 = QHBoxLayout(self.scrollAreaWidgetContents)
         self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
         self.plainTextEdit = QPlainTextEdit(self.scrollAreaWidgetContents)
@@ -1261,11 +1313,8 @@ class Ui_MainWindow(object):
 
         self.horizontalScrollBar = QScrollBar(self.frame_2)
         self.horizontalScrollBar.setObjectName(u"horizontalScrollBar")
-        sizePolicy6 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-        sizePolicy6.setHorizontalStretch(0)
-        sizePolicy6.setVerticalStretch(0)
-        sizePolicy6.setHeightForWidth(self.horizontalScrollBar.sizePolicy().hasHeightForWidth())
-        self.horizontalScrollBar.setSizePolicy(sizePolicy6)
+        sizePolicy5.setHeightForWidth(self.horizontalScrollBar.sizePolicy().hasHeightForWidth())
+        self.horizontalScrollBar.setSizePolicy(sizePolicy5)
         self.horizontalScrollBar.setStyleSheet(u"QScrollBar:horizontal {\n"
 "    border: none;\n"
 "    background: rgb(52, 59, 72);\n"

@@ -72,8 +72,8 @@ class MainWindow(QMainWindow):
         ## ==> END ##
 
         # SET ==> WINDOW TITLE
-        self.setWindowTitle('Main Window - Python Base')
-        UIFunctions.labelTitle(self, 'Main Window - Python Base')
+        self.setWindowTitle('Vehicle Calibration Tool - v0.1')
+        UIFunctions.labelTitle(self, 'Vehicle Calibration Tool - v0.1')
         UIFunctions.labelDescription(self, 'Set text')
         ## ==> END ##
 
