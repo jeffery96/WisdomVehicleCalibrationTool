@@ -220,13 +220,21 @@ class MainWindow(QMainWindow):
     def TableWidgetContext(self):
         menu = QMenu()
         clearAllAct = menu.addAction("清空全部")
-
+        saveAllAct = menu.addAction('保存报文')
         def tblwClearAllRow():
             row_num = self.ui.MsgShow_tblw.rowCount()
             for i in range(0, row_num)[::-1]:
                 self.ui.MsgShow_tblw.removeRow(i)
 
         clearAllAct.triggered.connect(tblwClearAllRow)
+
+        def tblwSaveAllRow():
+            fileName = QFileDialog.getSaveFileName(self, ("Save F:xile"),
+                                                   "/home/jana/untitled.png",
+                                                   ("Images (*.png *.xpm *.jpg)"))
+
+        saveAllAct.triggered.connect(tblwSaveAllRow)
+
         menu.exec_(QCursor.pos())
         pass
 

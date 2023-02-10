@@ -31,6 +31,7 @@ USBCANFD_TYPE = (41, 42, 43)
 USBCAN_XE_U_TYPE = (20, 21, 31)
 USBCAN_I_II_TYPE = (3, 4)
 
+
 class CAN_Device(ZCAN):
     def __init__(self, mainwindow):
         super().__init__()
@@ -46,7 +47,6 @@ class CAN_Device(ZCAN):
         self.DeviceInit()
 
         self.ms = UIUpdate(self.mw)
-        # self.ms.TableUpdate.connect(self.ms.TableUpdateFunc)
 
     def DeviceInit(self):
         self._zcan = ZCAN()

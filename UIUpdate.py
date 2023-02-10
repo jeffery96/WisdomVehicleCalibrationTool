@@ -3,6 +3,7 @@ from PySide2.QtWidgets import QTableWidgetItem
 from zlgcan import ZCAN_Receive_Data
 from main import *
 
+
 class UIUpdate(QObject):
 
     glb_signal = Signal([ZCAN_Receive_Data])
@@ -15,7 +16,8 @@ class UIUpdate(QObject):
         self.glb_signal.connect(self.PlainTextShow)
 
     def TableUpdateFunc(self, time, id, dir, dlc, data):
-        time = str(time)
+        time = time / 1e6
+        time = str(time) + 's'
         id = hex(id)
         dir = str(dir)
         dlc = str(dlc)
@@ -72,7 +74,7 @@ class UIUpdate(QObject):
                 case 0x18ffe6a5:
                     self.mw.ui.plainTextEdit_2.appendPlainText(f'收到报文,id:{hex(nm.id)},data:{nm.data}')
                     self.TableUpdateFunc(nm.time, nm.id, nm.dir, nm.dlc, nm.data)
-
+                    
                 case 0x18ffe6a6:
                     self.mw.ui.plainTextEdit_2.appendPlainText(f'收到报文,id:{hex(nm.id)},data:{nm.data}')
 
