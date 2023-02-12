@@ -18,7 +18,8 @@ class ProgressBar(QWidget):
         # self._pbBackColor = 'rgb(52,59,72)'
         # self._lbColor = 'black'
 
-        self._initValue = 36
+        self._initValue = 0
+        self._unit = '%'
 
         self.pb = QProgressBar(self)
         self.pb.setSizePolicy(
@@ -31,7 +32,7 @@ class ProgressBar(QWidget):
             'QProgressBar::chunk{background-color: #05B8CC; border-radius: 6px;}')
         self.lb = QLabel(self)
         self.lb.setStyleSheet(
-            'font-family: "Segoe UI";font-size: 18px; font-weight: bold; color: rgb(210,210,210); margin-right: 0px;'
+            'font-family: "Segoe UI";font-size: 16px; font-weight: bold; color: rgb(210,210,210); margin-right: 0px;'
         )
         self.hBox = QHBoxLayout(self)
         self.hBox.addWidget(self.pb)
@@ -43,15 +44,16 @@ class ProgressBar(QWidget):
 
         self.pb.setValue(self._initValue)
 
-    def setMaximum(self, max):
+    def setMinMaxValue(self, min, max):
+        self.pb.setMinimum(min)
         self.pb.setMaximum(max)
 
-    def setMaximum(self, min):
-        self.pb.setMinimum(min)
+    def setUnit(self, unit):
+        self._unit = unit
 
     def setValue(self, value):
         self.pb.setValue(value)
 
     def __setText(self):
-        self.lb.setText(str(self.pb.value()) + '℃')
+        self.lb.setText(str(self.pb.value()) + self._unit)
 

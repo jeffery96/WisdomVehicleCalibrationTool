@@ -22,7 +22,7 @@ import json
 import threading
 from PySide2.QtCore import Signal, QObject
 import datetime
-from UIUpdate import UIUpdate
+from ui_control import UiControl
 
 MAX_DISPLAY = 1000
 MAX_RCV_NUM = 10
@@ -46,7 +46,7 @@ class CAN_Device(ZCAN):
 
         self.DeviceInit()
 
-        self.ms = UIUpdate(self.mw)
+        self.ms = UiControl(self.mw)
 
     def DeviceInit(self):
         self._zcan = ZCAN()
@@ -102,12 +102,12 @@ class CAN_Device(ZCAN):
             self._isOpen = False
         else:
 
-            self._cur_dev_info = self._dev_info[self.mw.ui.DeviceType_cbb.currentText(
+            self._cur_dev_info = self._dev_info[self.mw.ui.cbb_devicetype.currentText(
             )]
 
             # Open Device
             self._dev_handle = self._zcan.OpenDevice(
-                self._cur_dev_info["dev_type"], self.mw.ui.DeviceIndex_cbb.currentIndex(), 0)
+                self._cur_dev_info["dev_type"], self.mw.ui.cbb_deviceindex.currentIndex(), 0)
             if self._dev_handle == INVALID_DEVICE_HANDLE:
                 # Open failed
                 # messagebox.showerror(title="打开设备", message="打开设备失败！")
@@ -125,14 +125,14 @@ class CAN_Device(ZCAN):
             # 0表示正常模式，能收能发
             chn_cfg.config.can.mode = 0
 
-            brt = self._cur_dev_info["chn_info"]["baudrate"][self.mw.ui.Baud_cbb.currentText(
+            brt = self._cur_dev_info["chn_info"]["baudrate"][self.mw.ui.cbb_baudrate.currentText(
             )]
             chn_cfg.config.can.timing0 = brt["timing0"]
             chn_cfg.config.can.timing1 = brt["timing1"]
             chn_cfg.config.can.acc_code = 0
             chn_cfg.config.can.acc_mask = 0xFFFFFFFF
 
-            can_index = self.mw.ui.CanChannel_cbb.currentIndex()
+            can_index = self.mw.ui.cbb_canchannel.currentIndex()
             if can_index == 0 or can_index == 1:
                 self._can_handle = self._zcan.InitCAN(
                     self._dev_handle, can_index, chn_cfg)
@@ -164,11 +164,11 @@ class CAN_Device(ZCAN):
                     return
 
             # self.strvDevCtrl.set("关闭")
-            self.mw.ui.OpenDevice_Btn.setText('关闭设备')
-            self.mw.ui.DeviceType_cbb.setEnabled(False)
-            self.mw.ui.DeviceIndex_cbb.setEnabled(False)
-            self.mw.ui.Baud_cbb.setEnabled(False)
-            self.mw.ui.CanChannel_cbb.setEnabled(False)
+            self.mw.ui.btn_opendevice.setText('关闭设备')
+            self.mw.ui.cbb_devicetype.setEnabled(False)
+            self.mw.ui.cbb_deviceindex.setEnabled(False)
+            self.mw.ui.cbb_baudrate.setEnabled(False)
+            self.mw.ui.cbb_canchannel.setEnabled(False)
 
             # 报文接收线程
             self._read_thread = threading.Thread(

@@ -177,22 +177,22 @@ class MainWindow(QMainWindow):
         #                                                                      #
         ## ==> USER CODES BELLOW                                              ##
         #######################################################################
-        self.ui.OpenDevice_Btn.clicked.connect(self.can_dev.BtnOpenDev_Click)
-        self.ui.CanTransClick_Btn.clicked.connect(
+        self.ui.btn_opendevice.clicked.connect(self.can_dev.BtnOpenDev_Click)
+        self.ui.btn_cantrans.clicked.connect(
             self.can_dev.BtnCanTrans_Click)
 
         # ==> QTableWidget RARAMETERS
         #######################################################################
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(
             QtWidgets.QHeaderView.Stretch)
-        self.ui.MsgShow_tblw.horizontalHeader().resizeSection(0, 60)
-        self.ui.MsgShow_tblw.horizontalHeader().resizeSection(1, 120)
-        self.ui.MsgShow_tblw.horizontalHeader().resizeSection(2, 120)
-        self.ui.MsgShow_tblw.horizontalHeader().resizeSection(3, 60)
-        self.ui.MsgShow_tblw.horizontalHeader().resizeSection(4, 60)
+        self.ui.tablew_msgdisplay.horizontalHeader().resizeSection(0, 60)
+        self.ui.tablew_msgdisplay.horizontalHeader().resizeSection(1, 120)
+        self.ui.tablew_msgdisplay.horizontalHeader().resizeSection(2, 120)
+        self.ui.tablew_msgdisplay.horizontalHeader().resizeSection(3, 60)
+        self.ui.tablew_msgdisplay.horizontalHeader().resizeSection(4, 60)
 
-        self.ui.MsgShow_tblw.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.ui.MsgShow_tblw.customContextMenuRequested.connect(
+        self.ui.tablew_msgdisplay.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.ui.tablew_msgdisplay.customContextMenuRequested.connect(
             self.TableWidgetContext)
         ## ==> END ##
         # self.ui.widget.setValue(0)
@@ -222,9 +222,9 @@ class MainWindow(QMainWindow):
         clearAllAct = menu.addAction("清空全部")
         saveAllAct = menu.addAction('保存报文')
         def tblwClearAllRow():
-            row_num = self.ui.MsgShow_tblw.rowCount()
+            row_num = self.ui.tablew_msgdisplay.rowCount()
             for i in range(0, row_num)[::-1]:
-                self.ui.MsgShow_tblw.removeRow(i)
+                self.ui.tablew_msgdisplay.removeRow(i)
 
         clearAllAct.triggered.connect(tblwClearAllRow)
 
