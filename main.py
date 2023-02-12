@@ -195,16 +195,16 @@ class MainWindow(QMainWindow):
         self.ui.MsgShow_tblw.customContextMenuRequested.connect(
             self.TableWidgetContext)
         ## ==> END ##
-        self.ui.widget.setValue(0)
-        self.ui.widget.setMinMaxValue(0, 3000)
-        self.ui.widget.setScaleMainNum(10)
-        self.ui.widget.setScaleSubNum(5)
-        self.ui.widget.setTitle('x100rpm')
-        # # self.ui.widget.setStyleSheet("background-color: rgb(255,255,255);")
-        self.ui.horizontalSlider_2.setRange(0, 3000)
-        self.ui.horizontalSlider_2.valueChanged.connect(
-            lambda: self.ui.widget.setValue(
-                self.ui.horizontalSlider_2.value()))
+        # self.ui.widget.setValue(0)
+        # self.ui.widget.setMinMaxValue(0, 3000)
+        # self.ui.widget.setScaleMainNum(10)
+        # self.ui.widget.setScaleSubNum(5)
+        # self.ui.widget.setTitle('x100rpm')
+        # # # self.ui.widget.setStyleSheet("background-color: rgb(255,255,255);")
+        # self.ui.horizontalSlider_2.setRange(0, 3000)
+        # self.ui.horizontalSlider_2.valueChanged.connect(
+        #     lambda: self.ui.widget.setValue(
+        #         self.ui.horizontalSlider_2.value()))
 
         #######################################################################
         #                                                                      #

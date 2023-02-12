@@ -217,12 +217,15 @@ class UIFunctions(MainWindow):
 
 
         ## SHOW ==> DROP SHADOW
-        self.shadow = QGraphicsDropShadowEffect(self)
-        self.shadow.setBlurRadius(17)
-        self.shadow.setXOffset(0)
-        self.shadow.setYOffset(0)
-        self.shadow.setColor(QColor(0, 0, 0, 150))
-        self.ui.frame_main.setGraphicsEffect(self.shadow)
+        #
+        # 使用以下方法给无边框窗口添加阴影，会导致自定义控件布局错乱和其他不可预知的后果
+        #
+        # self.shadow = QGraphicsDropShadowEffect(self)
+        # self.shadow.setBlurRadius(17)
+        # self.shadow.setXOffset(0)
+        # self.shadow.setYOffset(0)
+        # self.shadow.setColor(QColor(0, 0, 0, 150))
+        # self.ui.frame_main.setGraphicsEffect(self.shadow)
 
         ## ==> RESIZE WINDOW
         self.sizegrip = QSizeGrip(self.ui.frame_size_grip)
