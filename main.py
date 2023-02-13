@@ -57,7 +57,7 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.can_dev = CAN_Device(mainwindow=self)
+        self.can = CAN(mainwindow=self)
 
         # PRINT ==> SYSTEM
         print('System: ' + platform.system())
@@ -177,9 +177,9 @@ class MainWindow(QMainWindow):
         #                                                                      #
         ## ==> USER CODES BELLOW                                              ##
         #######################################################################
-        self.ui.btn_opendevice.clicked.connect(self.can_dev.BtnOpenDev_Click)
-        self.ui.btn_cantrans.clicked.connect(
-            self.can_dev.BtnCanTrans_Click)
+        self.ui.btn_opendevice.clicked.connect(self.can.BtnOpenDev_Click)
+        self.ui.btn_sendmsg.clicked.connect(
+            self.can.BtnCanTrans_Click)
 
         # ==> QTableWidget RARAMETERS
         #######################################################################
@@ -193,7 +193,8 @@ class MainWindow(QMainWindow):
 
         self.ui.tablew_msgdisplay.setContextMenuPolicy(Qt.CustomContextMenu)
         self.ui.tablew_msgdisplay.customContextMenuRequested.connect(
-            self.TableWidgetContext)
+            self.tablewContext)
+
         ## ==> END ##
         # self.ui.widget.setValue(0)
         # self.ui.widget.setMinMaxValue(0, 3000)
@@ -217,7 +218,7 @@ class MainWindow(QMainWindow):
         self.show()
         ## ==> END ##
 
-    def TableWidgetContext(self):
+    def tablewContext(self):
         menu = QMenu()
         clearAllAct = menu.addAction("清空全部")
         saveAllAct = menu.addAction('保存报文')

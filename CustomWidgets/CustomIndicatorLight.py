@@ -6,6 +6,7 @@ import sys
 
 
 class IndicatorLight(QWidget):
+    # TODO： 增加三种状态显示功能，灯灭、红灯故障、绿灯正常
     def __init__(self, parent=None):
         super().__init__(parent=parent)
 

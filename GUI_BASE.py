@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'GUI_BASEFvLuwp.ui'
+## Form generated from reading UI file 'GUI_BASEMlhyLF.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -22,7 +22,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1056, 742)
+        MainWindow.resize(1000, 720)
         MainWindow.setMinimumSize(QSize(1000, 720))
         palette = QPalette()
         brush = QBrush(QColor(255, 255, 255, 255))
@@ -65,11 +65,6 @@ class Ui_MainWindow(object):
         brush10.setStyle(Qt.SolidPattern)
         palette.setBrush(QPalette.Active, QPalette.ToolTipBase, brush10)
         palette.setBrush(QPalette.Active, QPalette.ToolTipText, brush6)
-        brush11 = QBrush(QColor(210, 210, 210, 128))
-        brush11.setStyle(Qt.NoBrush)
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette.setBrush(QPalette.Active, QPalette.PlaceholderText, brush11)
-#endif
         palette.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
         palette.setBrush(QPalette.Inactive, QPalette.Button, brush1)
         palette.setBrush(QPalette.Inactive, QPalette.Light, brush2)
@@ -88,11 +83,6 @@ class Ui_MainWindow(object):
         palette.setBrush(QPalette.Inactive, QPalette.AlternateBase, brush4)
         palette.setBrush(QPalette.Inactive, QPalette.ToolTipBase, brush10)
         palette.setBrush(QPalette.Inactive, QPalette.ToolTipText, brush6)
-        brush12 = QBrush(QColor(210, 210, 210, 128))
-        brush12.setStyle(Qt.NoBrush)
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush12)
-#endif
         palette.setBrush(QPalette.Disabled, QPalette.WindowText, brush4)
         palette.setBrush(QPalette.Disabled, QPalette.Button, brush1)
         palette.setBrush(QPalette.Disabled, QPalette.Light, brush2)
@@ -105,19 +95,14 @@ class Ui_MainWindow(object):
         palette.setBrush(QPalette.Disabled, QPalette.Base, brush1)
         palette.setBrush(QPalette.Disabled, QPalette.Window, brush1)
         palette.setBrush(QPalette.Disabled, QPalette.Shadow, brush7)
-        brush13 = QBrush(QColor(51, 153, 255, 255))
-        brush13.setStyle(Qt.SolidPattern)
-        palette.setBrush(QPalette.Disabled, QPalette.Highlight, brush13)
+        brush11 = QBrush(QColor(51, 153, 255, 255))
+        brush11.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Disabled, QPalette.Highlight, brush11)
         palette.setBrush(QPalette.Disabled, QPalette.Link, brush8)
         palette.setBrush(QPalette.Disabled, QPalette.LinkVisited, brush9)
         palette.setBrush(QPalette.Disabled, QPalette.AlternateBase, brush10)
         palette.setBrush(QPalette.Disabled, QPalette.ToolTipBase, brush10)
         palette.setBrush(QPalette.Disabled, QPalette.ToolTipText, brush6)
-        brush14 = QBrush(QColor(210, 210, 210, 128))
-        brush14.setStyle(Qt.NoBrush)
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush14)
-#endif
         MainWindow.setPalette(palette)
         font = QFont()
         font.setFamily(u"Segoe UI")
@@ -772,10 +757,23 @@ class Ui_MainWindow(object):
 "	background-color: rgb(35, 40, 49);\n"
 "	border: 2px solid rgb(43, 50, 61);\n"
 "}\n"
-"")
-        self.horizontalLayout_19 = QHBoxLayout(self.page_device)
-        self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
+"QLineEdit {\n"
+"	backg"
+                        "round-color: rgb(27, 29, 35);\n"
+"	border-radius: 5px;\n"
+"	border: 2px solid rgb(27, 29, 35);\n"
+"	padding-left: 10px;\n"
+"}\n"
+"QLineEdit:hover {\n"
+"	border: 2px solid rgb(64, 71, 88);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"	border: 2px solid rgb(91, 101, 124);\n"
+"}")
+        self.horizontalLayout_18 = QHBoxLayout(self.page_device)
+        self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
         self.verticalLayout_13 = QVBoxLayout()
+        self.verticalLayout_13.setSpacing(10)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.verticalLayout_13.setSizeConstraint(QLayout.SetDefaultConstraint)
         self.frame_4 = QFrame(self.page_device)
@@ -790,11 +788,18 @@ class Ui_MainWindow(object):
         self.frame_4.setFrameShape(QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_17 = QHBoxLayout(self.frame_4)
+        self.horizontalLayout_17.setSpacing(0)
         self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
+        self.horizontalLayout_17.setContentsMargins(10, 10, 10, 10)
         self.verticalLayout_12 = QVBoxLayout()
+        self.verticalLayout_12.setSpacing(0)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.formLayout = QFormLayout()
         self.formLayout.setObjectName(u"formLayout")
+        self.formLayout.setFormAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.formLayout.setHorizontalSpacing(20)
+        self.formLayout.setVerticalSpacing(10)
+        self.formLayout.setContentsMargins(-1, -1, -1, 10)
         self.lable_devicetype = QLabel(self.frame_4)
         self.lable_devicetype.setObjectName(u"lable_devicetype")
         self.lable_devicetype.setFont(font2)
@@ -862,6 +867,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_12.addLayout(self.formLayout)
 
         self.horizontalLayout_13 = QHBoxLayout()
+        self.horizontalLayout_13.setSpacing(0)
         self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
         self.btn_opendevice = QPushButton(self.frame_4)
         self.btn_opendevice.setObjectName(u"btn_opendevice")
@@ -883,20 +889,6 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_13.addWidget(self.frame_4)
-
-        self.horizontalLayout_15 = QHBoxLayout()
-        self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
-        self.btn_cantrans = QPushButton(self.page_device)
-        self.btn_cantrans.setObjectName(u"btn_cantrans")
-        sizePolicy6.setHeightForWidth(self.btn_cantrans.sizePolicy().hasHeightForWidth())
-        self.btn_cantrans.setSizePolicy(sizePolicy6)
-        self.btn_cantrans.setMinimumSize(QSize(93, 28))
-        self.btn_cantrans.setMaximumSize(QSize(93, 28))
-
-        self.horizontalLayout_15.addWidget(self.btn_cantrans)
-
-
-        self.verticalLayout_13.addLayout(self.horizontalLayout_15)
 
         self.horizontalLayout_16 = QHBoxLayout()
         self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
@@ -922,10 +914,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_13.addLayout(self.horizontalLayout_16)
 
 
-        self.horizontalLayout_19.addLayout(self.verticalLayout_13)
+        self.horizontalLayout_18.addLayout(self.verticalLayout_13)
 
-        self.horizontalLayout_18 = QHBoxLayout()
-        self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
+        self.verticalLayout_36 = QVBoxLayout()
+        self.verticalLayout_36.setObjectName(u"verticalLayout_36")
         self.tablew_msgdisplay = QTableWidget(self.page_device)
         if (self.tablew_msgdisplay.columnCount() < 6):
             self.tablew_msgdisplay.setColumnCount(6)
@@ -1012,13 +1004,146 @@ class Ui_MainWindow(object):
         self.tablew_msgdisplay.verticalHeader().setVisible(False)
         self.tablew_msgdisplay.verticalHeader().setStretchLastSection(False)
 
-        self.horizontalLayout_18.addWidget(self.tablew_msgdisplay)
+        self.verticalLayout_36.addWidget(self.tablew_msgdisplay)
+
+        self.frame_5 = QFrame(self.page_device)
+        self.frame_5.setObjectName(u"frame_5")
+        self.frame_5.setFrameShape(QFrame.StyledPanel)
+        self.frame_5.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_66 = QHBoxLayout(self.frame_5)
+        self.horizontalLayout_66.setObjectName(u"horizontalLayout_66")
+        self.horizontalLayout_19 = QHBoxLayout()
+        self.horizontalLayout_19.setSpacing(20)
+        self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
+        self.formLayout_2 = QFormLayout()
+        self.formLayout_2.setObjectName(u"formLayout_2")
+        self.formLayout_2.setHorizontalSpacing(10)
+        self.formLayout_2.setVerticalSpacing(20)
+        self.label_sendtype = QLabel(self.frame_5)
+        self.label_sendtype.setObjectName(u"label_sendtype")
+        self.label_sendtype.setFont(font2)
+
+        self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.label_sendtype)
+
+        self.cbb_sendtype = QComboBox(self.frame_5)
+        self.cbb_sendtype.addItem("")
+        self.cbb_sendtype.addItem("")
+        self.cbb_sendtype.addItem("")
+        self.cbb_sendtype.setObjectName(u"cbb_sendtype")
+        sizePolicy7 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        sizePolicy7.setHorizontalStretch(0)
+        sizePolicy7.setVerticalStretch(0)
+        sizePolicy7.setHeightForWidth(self.cbb_sendtype.sizePolicy().hasHeightForWidth())
+        self.cbb_sendtype.setSizePolicy(sizePolicy7)
+        self.cbb_sendtype.setMinimumSize(QSize(120, 26))
+        self.cbb_sendtype.setMaximumSize(QSize(120, 26))
+
+        self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.cbb_sendtype)
+
+        self.label_id = QLabel(self.frame_5)
+        self.label_id.setObjectName(u"label_id")
+        self.label_id.setFont(font2)
+
+        self.formLayout_2.setWidget(1, QFormLayout.LabelRole, self.label_id)
+
+        self.le_id = QLineEdit(self.frame_5)
+        self.le_id.setObjectName(u"le_id")
+        sizePolicy7.setHeightForWidth(self.le_id.sizePolicy().hasHeightForWidth())
+        self.le_id.setSizePolicy(sizePolicy7)
+        self.le_id.setMinimumSize(QSize(120, 26))
+        self.le_id.setMaximumSize(QSize(120, 26))
+
+        self.formLayout_2.setWidget(1, QFormLayout.FieldRole, self.le_id)
+
+        self.label_sendnum = QLabel(self.frame_5)
+        self.label_sendnum.setObjectName(u"label_sendnum")
+        self.label_sendnum.setFont(font2)
+
+        self.formLayout_2.setWidget(2, QFormLayout.LabelRole, self.label_sendnum)
+
+        self.le_sendnum = QLineEdit(self.frame_5)
+        self.le_sendnum.setObjectName(u"le_sendnum")
+        self.le_sendnum.setMinimumSize(QSize(120, 26))
+        self.le_sendnum.setMaximumSize(QSize(120, 26))
+
+        self.formLayout_2.setWidget(2, QFormLayout.FieldRole, self.le_sendnum)
 
 
-        self.horizontalLayout_19.addLayout(self.horizontalLayout_18)
+        self.horizontalLayout_19.addLayout(self.formLayout_2)
 
-        self.horizontalLayout_19.setStretch(0, 3)
-        self.horizontalLayout_19.setStretch(1, 9)
+        self.formLayout_3 = QFormLayout()
+        self.formLayout_3.setObjectName(u"formLayout_3")
+        self.formLayout_3.setHorizontalSpacing(10)
+        self.formLayout_3.setVerticalSpacing(20)
+        self.label_sendinterval = QLabel(self.frame_5)
+        self.label_sendinterval.setObjectName(u"label_sendinterval")
+        self.label_sendinterval.setFont(font2)
+
+        self.formLayout_3.setWidget(0, QFormLayout.LabelRole, self.label_sendinterval)
+
+        self.le_sendinterval = QLineEdit(self.frame_5)
+        self.le_sendinterval.setObjectName(u"le_sendinterval")
+        self.le_sendinterval.setMinimumSize(QSize(0, 26))
+        self.le_sendinterval.setMaximumSize(QSize(150, 26))
+
+        self.formLayout_3.setWidget(0, QFormLayout.FieldRole, self.le_sendinterval)
+
+        self.label_data = QLabel(self.frame_5)
+        self.label_data.setObjectName(u"label_data")
+        self.label_data.setFont(font2)
+
+        self.formLayout_3.setWidget(1, QFormLayout.LabelRole, self.label_data)
+
+        self.le_data = QLineEdit(self.frame_5)
+        self.le_data.setObjectName(u"le_data")
+        self.le_data.setMinimumSize(QSize(180, 26))
+        self.le_data.setMaximumSize(QSize(180, 26))
+
+        self.formLayout_3.setWidget(1, QFormLayout.FieldRole, self.le_data)
+
+
+        self.horizontalLayout_19.addLayout(self.formLayout_3)
+
+
+        self.horizontalLayout_66.addLayout(self.horizontalLayout_19)
+
+        self.horizontalSpacer_16 = QSpacerItem(63, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_66.addItem(self.horizontalSpacer_16)
+
+        self.verticalLayout_37 = QVBoxLayout()
+        self.verticalLayout_37.setObjectName(u"verticalLayout_37")
+        self.verticalSpacer_13 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_37.addItem(self.verticalSpacer_13)
+
+        self.horizontalLayout_15 = QHBoxLayout()
+        self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
+        self.btn_sendmsg = QPushButton(self.frame_5)
+        self.btn_sendmsg.setObjectName(u"btn_sendmsg")
+        sizePolicy6.setHeightForWidth(self.btn_sendmsg.sizePolicy().hasHeightForWidth())
+        self.btn_sendmsg.setSizePolicy(sizePolicy6)
+        self.btn_sendmsg.setMinimumSize(QSize(93, 28))
+        self.btn_sendmsg.setMaximumSize(QSize(93, 28))
+
+        self.horizontalLayout_15.addWidget(self.btn_sendmsg)
+
+
+        self.verticalLayout_37.addLayout(self.horizontalLayout_15)
+
+
+        self.horizontalLayout_66.addLayout(self.verticalLayout_37)
+
+        self.horizontalLayout_66.setStretch(1, 1)
+        self.horizontalLayout_66.setStretch(2, 1)
+
+        self.verticalLayout_36.addWidget(self.frame_5)
+
+        self.verticalLayout_36.setStretch(0, 3)
+        self.verticalLayout_36.setStretch(1, 1)
+
+        self.horizontalLayout_18.addLayout(self.verticalLayout_36)
+
         self.stackedWidget.addWidget(self.page_device)
         self.page_panel = QWidget()
         self.page_panel.setObjectName(u"page_panel")
@@ -2645,7 +2770,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 222, 222))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 274, 218))
         self.horizontalLayout_11 = QHBoxLayout(self.scrollAreaWidgetContents)
         self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
         self.plainTextEdit = QPlainTextEdit(self.scrollAreaWidgetContents)
@@ -2784,40 +2909,25 @@ class Ui_MainWindow(object):
         self.tableWidget.setSizePolicy(sizePolicy)
         palette1 = QPalette()
         palette1.setBrush(QPalette.Active, QPalette.WindowText, brush6)
-        brush15 = QBrush(QColor(39, 44, 54, 255))
-        brush15.setStyle(Qt.SolidPattern)
-        palette1.setBrush(QPalette.Active, QPalette.Button, brush15)
+        brush12 = QBrush(QColor(39, 44, 54, 255))
+        brush12.setStyle(Qt.SolidPattern)
+        palette1.setBrush(QPalette.Active, QPalette.Button, brush12)
         palette1.setBrush(QPalette.Active, QPalette.Text, brush6)
         palette1.setBrush(QPalette.Active, QPalette.ButtonText, brush6)
-        palette1.setBrush(QPalette.Active, QPalette.Base, brush15)
-        palette1.setBrush(QPalette.Active, QPalette.Window, brush15)
-        brush16 = QBrush(QColor(210, 210, 210, 128))
-        brush16.setStyle(Qt.NoBrush)
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette1.setBrush(QPalette.Active, QPalette.PlaceholderText, brush16)
-#endif
+        palette1.setBrush(QPalette.Active, QPalette.Base, brush12)
+        palette1.setBrush(QPalette.Active, QPalette.Window, brush12)
         palette1.setBrush(QPalette.Inactive, QPalette.WindowText, brush6)
-        palette1.setBrush(QPalette.Inactive, QPalette.Button, brush15)
+        palette1.setBrush(QPalette.Inactive, QPalette.Button, brush12)
         palette1.setBrush(QPalette.Inactive, QPalette.Text, brush6)
         palette1.setBrush(QPalette.Inactive, QPalette.ButtonText, brush6)
-        palette1.setBrush(QPalette.Inactive, QPalette.Base, brush15)
-        palette1.setBrush(QPalette.Inactive, QPalette.Window, brush15)
-        brush17 = QBrush(QColor(210, 210, 210, 128))
-        brush17.setStyle(Qt.NoBrush)
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette1.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush17)
-#endif
+        palette1.setBrush(QPalette.Inactive, QPalette.Base, brush12)
+        palette1.setBrush(QPalette.Inactive, QPalette.Window, brush12)
         palette1.setBrush(QPalette.Disabled, QPalette.WindowText, brush6)
-        palette1.setBrush(QPalette.Disabled, QPalette.Button, brush15)
+        palette1.setBrush(QPalette.Disabled, QPalette.Button, brush12)
         palette1.setBrush(QPalette.Disabled, QPalette.Text, brush6)
         palette1.setBrush(QPalette.Disabled, QPalette.ButtonText, brush6)
-        palette1.setBrush(QPalette.Disabled, QPalette.Base, brush15)
-        palette1.setBrush(QPalette.Disabled, QPalette.Window, brush15)
-        brush18 = QBrush(QColor(210, 210, 210, 128))
-        brush18.setStyle(Qt.NoBrush)
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette1.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush18)
-#endif
+        palette1.setBrush(QPalette.Disabled, QPalette.Base, brush12)
+        palette1.setBrush(QPalette.Disabled, QPalette.Window, brush12)
         self.tableWidget.setPalette(palette1)
         self.tableWidget.setStyleSheet(u"QTableWidget {	\n"
 "	background-color: rgb(39, 44, 54);\n"
@@ -3032,7 +3142,6 @@ class Ui_MainWindow(object):
         self.cbb_canchannel.setItemText(2, QCoreApplication.translate("MainWindow", u"0\u548c1", None))
 
         self.btn_opendevice.setText(QCoreApplication.translate("MainWindow", u"\u6253\u5f00\u8bbe\u5907", None))
-        self.btn_cantrans.setText(QCoreApplication.translate("MainWindow", u"\u53d1\u9001", None))
         ___qtablewidgetitem = self.tablew_msgdisplay.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"\u5e8f\u53f7", None));
         ___qtablewidgetitem1 = self.tablew_msgdisplay.horizontalHeaderItem(1)
@@ -3045,6 +3154,21 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"\u957f\u5ea6", None));
         ___qtablewidgetitem5 = self.tablew_msgdisplay.horizontalHeaderItem(5)
         ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"\u6570\u636e", None));
+        self.label_sendtype.setText(QCoreApplication.translate("MainWindow", u"\u53d1\u9001\u65b9\u5f0f:", None))
+        self.cbb_sendtype.setItemText(0, QCoreApplication.translate("MainWindow", u"\u6b63\u5e38\u53d1\u9001", None))
+        self.cbb_sendtype.setItemText(1, QCoreApplication.translate("MainWindow", u"\u5355\u6b21\u53d1\u9001", None))
+        self.cbb_sendtype.setItemText(2, QCoreApplication.translate("MainWindow", u"\u81ea\u53d1\u81ea\u6536", None))
+
+        self.label_id.setText(QCoreApplication.translate("MainWindow", u"\u62a5\u6587ID:", None))
+        self.le_id.setText(QCoreApplication.translate("MainWindow", u"0x18ffe6a5", None))
+        self.label_sendnum.setText(QCoreApplication.translate("MainWindow", u"\u53d1\u9001\u6b21\u6570:", None))
+        self.le_sendnum.setText(QCoreApplication.translate("MainWindow", u"1", None))
+        self.label_sendinterval.setText(QCoreApplication.translate("MainWindow", u"\u53d1\u9001\u95f4\u9694:", None))
+        self.le_sendinterval.setText(QCoreApplication.translate("MainWindow", u"10", None))
+        self.label_data.setText(QCoreApplication.translate("MainWindow", u"\u6570\u636e\u57df:", None))
+        self.le_data.setInputMask("")
+        self.le_data.setText(QCoreApplication.translate("MainWindow", u"00 01 02 03 04 05 06 07", None))
+        self.btn_sendmsg.setText(QCoreApplication.translate("MainWindow", u"\u53d1\u9001", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Motor Speed", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Velocity", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Motor Torque", None))

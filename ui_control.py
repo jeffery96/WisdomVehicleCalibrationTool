@@ -6,16 +6,30 @@ from main import *
 
 class UiControl(QObject):
 
-    glb_signal = Signal([ZCAN_Receive_Data])
+    msg_signal = Signal([ZCAN_Receive_Data])
     TableUpdateSignal = Signal(str, str, str, str, str)
 
     def __init__(self, mainwindow):
         super().__init__()
         self.mw = mainwindow  # type: MainWindow
-        self.TableUpdateSignal.connect(self.TableUpdateFunc)
-        self.glb_signal.connect(self.PlainTextShow)
-
+        self.slotInit()
         self.uiInit()
+
+    def slotInit(self):
+        self.TableUpdateSignal.connect(self.msgTablewDisplay)
+        self.msg_signal.connect(self.msgUiDisplay)
+
+        def infoPteContext():
+            menu = QMenu()
+            clearAllAct = menu.addAction("清空全部")
+            clearAllAct.triggered.connect(infoPteClearAll)
+            menu.exec_(QCursor.pos())
+
+        self.mw.ui.pte_info.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.mw.ui.pte_info.customContextMenuRequested.connect(infoPteContext)
+
+        def infoPteClearAll():
+            self.mw.ui.pte_info.clear()
 
     def uiInit(self):
         # Motor Speed仪表盘初始化
@@ -38,14 +52,14 @@ class UiControl(QObject):
         self.mw.ui.gp_motortorque.setScaleSubNum(5)
         self.mw.ui.gp_motortorque.setMinRadio(100)
         self.mw.ui.gp_motortorque.setTitle('x100Nm')
-        self.mw.ui.gp_motortorque.setValueSubTitle('Nm')
+        self.mw.ui.gp_motortorque.setValueSubTitle('N.m.')
         # VCU Torque仪表盘初始化
         self.mw.ui.gp_vcutorque.setMinMaxValue(-3000, 3000)
         self.mw.ui.gp_vcutorque.setScaleMainNum(10)
         self.mw.ui.gp_vcutorque.setScaleSubNum(5)
         self.mw.ui.gp_vcutorque.setMinRadio(100)
         self.mw.ui.gp_vcutorque.setTitle('x100Nm')
-        self.mw.ui.gp_vcutorque.setValueSubTitle('Nm')
+        self.mw.ui.gp_vcutorque.setValueSubTitle('N.m.')
         # SOC进度条初始化
         self.mw.ui.pb_soc.setMinMaxValue(0, 100)
         self.mw.ui.pb_soc.setUnit('%')
@@ -62,7 +76,33 @@ class UiControl(QObject):
         self.mw.ui.pb_motor2temp.setMinMaxValue(-40, 170)
         self.mw.ui.pb_motor2temp.setUnit('℃')
 
-    def TableUpdateFunc(self, time, id, dir, dlc, data):
+    def msgUiDisplay(self, msgs):
+        # TODO：增加DBC解析信号功能
+        msgs = list(map(self.msgConvert, msgs))
+
+        for m in msgs:
+            match m.id:
+                case 0x18ffe6a5:
+                    pass
+
+                case 0x18ffe6a6:
+                    pass
+
+                case 0x18FF3D27:
+                    Motor1_Speed = m.getBits(0, 16) - 15000
+                    self.mw.ui.gp_motorspeed.setValue(Motor1_Speed)
+
+                case 0x1884EFF3:
+                    SOC = m.getBits(0, 8) * 0.4
+                    self.mw.ui.pb_soc.setValue(SOC)
+
+                case _:
+                    pass
+
+            self.mw.ui.pte_info.appendPlainText(f'收到报文\nID:{hex(m.id)}\n数据域:{m.data}\n')
+            self.msgTablewDisplay(m.time, m.id, m.dir, m.dlc, m.data)
+
+    def msgTablewDisplay(self, time, id, dir, dlc, data):
         time = time / 1e6
         time = str(time) + 's'
         id = hex(id)
@@ -95,14 +135,42 @@ class UiControl(QObject):
         self.mw.ui.tablew_msgdisplay.setItem(table_row_cnt, 5, QTableWidgetItem(data))
         self.mw.ui.tablew_msgdisplay.scrollToBottom()
 
+    def infoPteDisplay(self, msgs):
+
+        new_msgs = list(map(self.frameConvert, msgs))
+        for nm in new_msgs:
+            match nm.id:
+                case 0x18ffe6a5:
+                    self.mw.ui.pte_info.appendPlainText(f'收到报文,id:{hex(nm.id)},data:{nm.data}')
+                    self.msgTablewDisplay(nm.time, nm.id, nm.dir, nm.dlc, nm.data)
+                    pass
+
+                case 0x18ffe6a6:
+                    # self.mw.ui.pte_info.appendPlainText(f'收到报文,id:{hex(nm.id)},data:{nm.data}')
+                    pass
+                case 0x18ff3d27:
+                    pass
+
+                case _:
+                    # self.mw.ui.pte_info.appendPlainText('收到未知报文')
+                    pass
     @staticmethod
-    def FrameConvert(msg: ZCAN_Receive_Data):
+    def msgConvert(msg: ZCAN_Receive_Data):
         class NewFrame:
             id = None
             time = None
             dir = None
             dlc = None
             data = None
+            Bytes = None
+
+            def getBits(self, startbit, len):
+                data_in_64bits = 0
+                for i, B in enumerate(self.Bytes):
+                    data_in_64bits = data_in_64bits + (B << i*8)
+
+                res = int(bin(data_in_64bits)[::-1][startbit:len][::-1], 2)
+                return res
 
         nf = NewFrame()
         nf.id = msg.frame.can_id
@@ -110,20 +178,10 @@ class UiControl(QObject):
         nf.dir = 'rx'
         nf.dlc = msg.frame.can_dlc
         nf.data = list(msg.frame.data)
+        nf.Bytes = nf.data
 
         return nf
 
-    def PlainTextShow(self, msgs):
+    def getMsgSignal(self, startbit, length):
+        pass
 
-        new_msgs = list(map(self.FrameConvert, msgs))
-        for nm in new_msgs:
-            match nm.id:
-                case 0x18ffe6a5:
-                    self.mw.ui.pte_info.appendPlainText(f'收到报文,id:{hex(nm.id)},data:{nm.data}')
-                    self.TableUpdateFunc(nm.time, nm.id, nm.dir, nm.dlc, nm.data)
-                    
-                case 0x18ffe6a6:
-                    self.mw.ui.pte_info.appendPlainText(f'收到报文,id:{hex(nm.id)},data:{nm.data}')
-
-                case _:
-                    self.mw.ui.pte_info.appendPlainText('收到未知报文')

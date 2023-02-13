@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1056</width>
-    <height>742</height>
+    <width>1000</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -182,15 +182,6 @@
        </color>
       </brush>
      </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="NoBrush">
-       <color alpha="128">
-        <red>210</red>
-        <green>210</green>
-        <blue>210</blue>
-       </color>
-      </brush>
-     </colorrole>
     </active>
     <inactive>
      <colorrole role="WindowText">
@@ -355,15 +346,6 @@
        </color>
       </brush>
      </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="NoBrush">
-       <color alpha="128">
-        <red>210</red>
-        <green>210</green>
-        <blue>210</blue>
-       </color>
-      </brush>
-     </colorrole>
     </inactive>
     <disabled>
      <colorrole role="WindowText">
@@ -522,15 +504,6 @@
      <colorrole role="ToolTipText">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>210</red>
-        <green>210</green>
-        <blue>210</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="NoBrush">
-       <color alpha="128">
         <red>210</red>
         <green>210</green>
         <blue>210</blue>
@@ -1662,11 +1635,25 @@ QFrame QPushButton:pressed {
 	background-color: rgb(35, 40, 49);
 	border: 2px solid rgb(43, 50, 61);
 }
-</string>
+QLineEdit {
+	background-color: rgb(27, 29, 35);
+	border-radius: 5px;
+	border: 2px solid rgb(27, 29, 35);
+	padding-left: 10px;
+}
+QLineEdit:hover {
+	border: 2px solid rgb(64, 71, 88);
+}
+QLineEdit:focus {
+	border: 2px solid rgb(91, 101, 124);
+}</string>
                    </property>
-                   <layout class="QHBoxLayout" name="horizontalLayout_19" stretch="3,9">
+                   <layout class="QHBoxLayout" name="horizontalLayout_18">
                     <item>
                      <layout class="QVBoxLayout" name="verticalLayout_13">
+                      <property name="spacing">
+                       <number>10</number>
+                      </property>
                       <property name="sizeConstraint">
                        <enum>QLayout::SetDefaultConstraint</enum>
                       </property>
@@ -1697,10 +1684,40 @@ QFrame QPushButton:pressed {
                          <enum>QFrame::Raised</enum>
                         </property>
                         <layout class="QHBoxLayout" name="horizontalLayout_17">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>10</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>10</number>
+                         </property>
                          <item>
                           <layout class="QVBoxLayout" name="verticalLayout_12">
+                           <property name="spacing">
+                            <number>0</number>
+                           </property>
                            <item>
                             <layout class="QFormLayout" name="formLayout">
+                             <property name="formAlignment">
+                              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                             </property>
+                             <property name="horizontalSpacing">
+                              <number>20</number>
+                             </property>
+                             <property name="verticalSpacing">
+                              <number>10</number>
+                             </property>
+                             <property name="bottomMargin">
+                              <number>10</number>
+                             </property>
                              <item row="0" column="0">
                               <widget class="QLabel" name="lable_devicetype">
                                <property name="font">
@@ -1848,6 +1865,9 @@ QFrame QPushButton:pressed {
                            </item>
                            <item>
                             <layout class="QHBoxLayout" name="horizontalLayout_13">
+                             <property name="spacing">
+                              <number>0</number>
+                             </property>
                              <item>
                               <widget class="QPushButton" name="btn_opendevice">
                                <property name="sizePolicy">
@@ -1879,35 +1899,6 @@ QFrame QPushButton:pressed {
                          </item>
                         </layout>
                        </widget>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_15">
-                        <item>
-                         <widget class="QPushButton" name="btn_cantrans">
-                          <property name="sizePolicy">
-                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                           </sizepolicy>
-                          </property>
-                          <property name="minimumSize">
-                           <size>
-                            <width>93</width>
-                            <height>28</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>93</width>
-                            <height>28</height>
-                           </size>
-                          </property>
-                          <property name="text">
-                           <string>发送</string>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
                       </item>
                       <item>
                        <layout class="QHBoxLayout" name="horizontalLayout_16">
@@ -1942,7 +1933,7 @@ QPlainTextEdit:focus {
                      </layout>
                     </item>
                     <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_18">
+                     <layout class="QVBoxLayout" name="verticalLayout_36" stretch="3,1">
                       <item>
                        <widget class="QTableWidget" name="tablew_msgdisplay">
                         <property name="sizePolicy">
@@ -2028,11 +2019,11 @@ QHeaderView::section:vertical
                         <attribute name="horizontalHeaderCascadingSectionResizes">
                          <bool>false</bool>
                         </attribute>
-                        <attribute name="horizontalHeaderMinimumSectionSize">
-                         <number>60</number>
-                        </attribute>
                         <attribute name="horizontalHeaderDefaultSectionSize">
                          <number>100</number>
+                        </attribute>
+                        <attribute name="horizontalHeaderMinimumSectionSize">
+                         <number>60</number>
                         </attribute>
                         <attribute name="horizontalHeaderStretchLastSection">
                          <bool>true</bool>
@@ -2073,6 +2064,286 @@ QHeaderView::section:vertical
                           <string>数据</string>
                          </property>
                         </column>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QFrame" name="frame_5">
+                        <property name="frameShape">
+                         <enum>QFrame::StyledPanel</enum>
+                        </property>
+                        <property name="frameShadow">
+                         <enum>QFrame::Raised</enum>
+                        </property>
+                        <layout class="QHBoxLayout" name="horizontalLayout_66" stretch="0,1,1">
+                         <item>
+                          <layout class="QHBoxLayout" name="horizontalLayout_19">
+                           <property name="spacing">
+                            <number>20</number>
+                           </property>
+                           <item>
+                            <layout class="QFormLayout" name="formLayout_2">
+                             <property name="horizontalSpacing">
+                              <number>10</number>
+                             </property>
+                             <property name="verticalSpacing">
+                              <number>20</number>
+                             </property>
+                             <item row="0" column="0">
+                              <widget class="QLabel" name="label_sendtype">
+                               <property name="font">
+                                <font>
+                                 <family>Segoe UI</family>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>发送方式:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="0" column="1">
+                              <widget class="QComboBox" name="cbb_sendtype">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
+                               <property name="minimumSize">
+                                <size>
+                                 <width>120</width>
+                                 <height>26</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>120</width>
+                                 <height>26</height>
+                                </size>
+                               </property>
+                               <item>
+                                <property name="text">
+                                 <string>正常发送</string>
+                                </property>
+                               </item>
+                               <item>
+                                <property name="text">
+                                 <string>单次发送</string>
+                                </property>
+                               </item>
+                               <item>
+                                <property name="text">
+                                 <string>自发自收</string>
+                                </property>
+                               </item>
+                              </widget>
+                             </item>
+                             <item row="1" column="0">
+                              <widget class="QLabel" name="label_id">
+                               <property name="font">
+                                <font>
+                                 <family>Segoe UI</family>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>报文ID:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="1" column="1">
+                              <widget class="QLineEdit" name="le_id">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
+                               <property name="minimumSize">
+                                <size>
+                                 <width>120</width>
+                                 <height>26</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>120</width>
+                                 <height>26</height>
+                                </size>
+                               </property>
+                               <property name="text">
+                                <string>0x18ffe6a5</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="2" column="0">
+                              <widget class="QLabel" name="label_sendnum">
+                               <property name="font">
+                                <font>
+                                 <family>Segoe UI</family>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>发送次数:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="2" column="1">
+                              <widget class="QLineEdit" name="le_sendnum">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>120</width>
+                                 <height>26</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>120</width>
+                                 <height>26</height>
+                                </size>
+                               </property>
+                               <property name="text">
+                                <string>1</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                           <item>
+                            <layout class="QFormLayout" name="formLayout_3">
+                             <property name="horizontalSpacing">
+                              <number>10</number>
+                             </property>
+                             <property name="verticalSpacing">
+                              <number>20</number>
+                             </property>
+                             <item row="0" column="0">
+                              <widget class="QLabel" name="label_sendinterval">
+                               <property name="font">
+                                <font>
+                                 <family>Segoe UI</family>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>发送间隔:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="0" column="1">
+                              <widget class="QLineEdit" name="le_sendinterval">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>26</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>150</width>
+                                 <height>26</height>
+                                </size>
+                               </property>
+                               <property name="text">
+                                <string>10</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="1" column="0">
+                              <widget class="QLabel" name="label_data">
+                               <property name="font">
+                                <font>
+                                 <family>Segoe UI</family>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>数据域:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="1" column="1">
+                              <widget class="QLineEdit" name="le_data">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>180</width>
+                                 <height>26</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>180</width>
+                                 <height>26</height>
+                                </size>
+                               </property>
+                               <property name="inputMask">
+                                <string/>
+                               </property>
+                               <property name="text">
+                                <string>00 01 02 03 04 05 06 07</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <spacer name="horizontalSpacer_16">
+                           <property name="orientation">
+                            <enum>Qt::Horizontal</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>63</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <layout class="QVBoxLayout" name="verticalLayout_37">
+                           <item>
+                            <spacer name="verticalSpacer_13">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>20</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                           <item>
+                            <layout class="QHBoxLayout" name="horizontalLayout_15">
+                             <item>
+                              <widget class="QPushButton" name="btn_sendmsg">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
+                               <property name="minimumSize">
+                                <size>
+                                 <width>93</width>
+                                 <height>28</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>93</width>
+                                 <height>28</height>
+                                </size>
+                               </property>
+                               <property name="text">
+                                <string>发送</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
                        </widget>
                       </item>
                      </layout>
@@ -5732,8 +6003,8 @@ QScrollBar:horizontal {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>222</width>
-                              <height>222</height>
+                              <width>274</width>
+                              <height>218</height>
                              </rect>
                             </property>
                             <layout class="QHBoxLayout" name="horizontalLayout_11">
@@ -5981,15 +6252,6 @@ QCommandLinkButton:pressed {
                               </color>
                              </brush>
                             </colorrole>
-                            <colorrole role="PlaceholderText">
-                             <brush brushstyle="NoBrush">
-                              <color alpha="128">
-                               <red>210</red>
-                               <green>210</green>
-                               <blue>210</blue>
-                              </color>
-                             </brush>
-                            </colorrole>
                            </active>
                            <inactive>
                             <colorrole role="WindowText">
@@ -6046,15 +6308,6 @@ QCommandLinkButton:pressed {
                               </color>
                              </brush>
                             </colorrole>
-                            <colorrole role="PlaceholderText">
-                             <brush brushstyle="NoBrush">
-                              <color alpha="128">
-                               <red>210</red>
-                               <green>210</green>
-                               <blue>210</blue>
-                              </color>
-                             </brush>
-                            </colorrole>
                            </inactive>
                            <disabled>
                             <colorrole role="WindowText">
@@ -6108,15 +6361,6 @@ QCommandLinkButton:pressed {
                                <red>39</red>
                                <green>44</green>
                                <blue>54</blue>
-                              </color>
-                             </brush>
-                            </colorrole>
-                            <colorrole role="PlaceholderText">
-                             <brush brushstyle="NoBrush">
-                              <color alpha="128">
-                               <red>210</red>
-                               <green>210</green>
-                               <blue>210</blue>
                               </color>
                              </brush>
                             </colorrole>

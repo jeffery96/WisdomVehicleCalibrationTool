@@ -6,7 +6,7 @@ import sys
 
 
 class ProgressBar(QWidget):
-
+    # TODO: 完善进度条功能
     def __init__(self, parent=None):
         super(ProgressBar, self).__init__(parent=parent)
         # self.resize(500, 500)

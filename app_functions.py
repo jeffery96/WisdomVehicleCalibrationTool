@@ -32,7 +32,7 @@ USBCAN_XE_U_TYPE = (20, 21, 31)
 USBCAN_I_II_TYPE = (3, 4)
 
 
-class CAN_Device(ZCAN):
+class CAN(ZCAN):
     def __init__(self, mainwindow):
         super().__init__()
         self.mw = mainwindow    # type: MainWindow
@@ -92,11 +92,11 @@ class CAN_Device(ZCAN):
             self._zcan.CloseDevice(self._dev_handle)
 
             # self.strvDevCtrl.set("打开")
-            self.mw.ui.OpenDevice_Btn.setText('打开设备')
-            self.mw.ui.DeviceType_cbb.setEnabled(True)
-            self.mw.ui.DeviceIndex_cbb.setEnabled(True)
-            self.mw.ui.Baud_cbb.setEnabled(True)
-            self.mw.ui.CanChannel_cbb.setEnabled(True)
+            self.mw.ui.btn_opendevice.setText('打开设备')
+            self.mw.ui.cbb_devicetype.setEnabled(True)
+            self.mw.ui.cbb_deviceindex.setEnabled(True)
+            self.mw.ui.cbb_baudrate.setEnabled(True)
+            self.mw.ui.cbb_canchannel.setEnabled(True)
             # self.cmbDevType["state"] = "readonly"
             # self.cmbDevIdx["state"] = "readonly"
             self._isOpen = False
@@ -172,33 +172,51 @@ class CAN_Device(ZCAN):
 
             # 报文接收线程
             self._read_thread = threading.Thread(
-                None, target=self.CanRecvThreadFunc)
+                None, target=self.msgRecvThreadFunc)
             self._read_thread.start()
 
             self._isOpen = True
 
     def BtnCanTrans_Click(self):
-        msg = ZCAN_Transmit_Data()
-        msg.transmit_type = 2
-        msg.frame.can_id = 0x18ffe6a5
-        msg.frame.rtr = 0
-        msg.frame.eff = 1
-        msg.frame.can_dlc = 8
-        msg.frame.data = (
-            0x01,
-            0x02,
-            0x03,
-            0x04,
-            0x05,
-            0x06,
-            0x07,
-            0x08,
-        )
-        ret = self._zcan.Transmit(self._can_handle_dict[0], msg, 1)
-        # print(f'发送成功报文数:{ret}')
-        pass
+        # TODO：增加周期发送报文功能
+        if self._isOpen:
+            msg = ZCAN_Transmit_Data()
+            msg.transmit_type = self.mw.ui.cbb_sendtype.currentIndex()
+            msg.frame.can_id = int(self.mw.ui.le_id.text(), 16)
+            msg.frame.rtr = 0
+            msg.frame.eff = 1
+            msg.frame.can_dlc = 8
 
-    def CanRecvThreadFunc(self):
+            data = self.mw.ui.le_data.text().split(' ')
+            for i in range(8):
+                if i < len(data):
+                    try:
+                        msg.frame.data[i] = int(data[i], 16)
+                    except:
+                        msg.frame.data[i] = 0
+                else:
+                    msg.frame.data[i] = 0
+
+            ret = self._zcan.Transmit(self._can_handle_dict[0], msg, 1)
+
+        # msg.frame.data = (
+        #     0x01,
+        #     0x02,
+        #     0x03,
+        #     0x04,
+        #     0x05,
+        #     0x06,
+        #     0x07,
+        #     0x08,
+        # )
+
+        # print(f'发送成功报文数:{ret}')
+        else:
+            QMessageBox.information(self.mw, f'设备未打开！',
+                                    f'设备未打开！',
+                                    QMessageBox.Ok)
+
+    def msgRecvThreadFunc(self):
         while True:
             if self._isOpen:
                 can_num = self._zcan.GetReceiveNum(
@@ -211,13 +229,12 @@ class CAN_Device(ZCAN):
                 can_msgs, act_num = self._zcan.Receive(
                     self._can_handle, read_cnt, MAX_RCV_NUM)  # type: list
 
-                self.ms.glb_signal.emit(can_msgs)
-                print('收到报文内容:')
-                data = can_msgs[0].frame.data
-                print(list(map(hex, data)))
+                self.ms.msg_signal.emit(can_msgs)
+                # print('收到报文内容:')
+                # data = can_msgs[0].frame.data
+                # print(list(map(hex, data)))
 
                 # self.MsgDisplay(can_msgs[0])
-
 
     # def MsgDisplay(self, msg):
     #     frame = msg.frame
@@ -235,10 +252,3 @@ class CAN_Device(ZCAN):
     #
     #     self.ms.TableUpdateSignal.emit(time, id, dir, dlc, data)
 
-
-class Functions(MainWindow):
-
-    @staticmethod
-    def print_some():
-        print("设备打开")
-    pass
