@@ -212,8 +212,8 @@ class CAN(ZCAN):
 
         # print(f'发送成功报文数:{ret}')
         else:
-            QMessageBox.information(self.mw, f'设备未打开！',
-                                    f'设备未打开！',
+            QMessageBox.information(self.mw, f'设备未打开',
+                                    f'设备未打开,请先打开设备',
                                     QMessageBox.Ok)
 
     def msgRecvThreadFunc(self):

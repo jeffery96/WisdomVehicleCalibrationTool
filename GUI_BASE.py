@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'GUI_BASEMlhyLF.ui'
+## Form generated from reading UI file 'GUI_BASEEpyGYj.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -65,6 +65,11 @@ class Ui_MainWindow(object):
         brush10.setStyle(Qt.SolidPattern)
         palette.setBrush(QPalette.Active, QPalette.ToolTipBase, brush10)
         palette.setBrush(QPalette.Active, QPalette.ToolTipText, brush6)
+        brush11 = QBrush(QColor(210, 210, 210, 128))
+        brush11.setStyle(Qt.NoBrush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Active, QPalette.PlaceholderText, brush11)
+#endif
         palette.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
         palette.setBrush(QPalette.Inactive, QPalette.Button, brush1)
         palette.setBrush(QPalette.Inactive, QPalette.Light, brush2)
@@ -83,6 +88,11 @@ class Ui_MainWindow(object):
         palette.setBrush(QPalette.Inactive, QPalette.AlternateBase, brush4)
         palette.setBrush(QPalette.Inactive, QPalette.ToolTipBase, brush10)
         palette.setBrush(QPalette.Inactive, QPalette.ToolTipText, brush6)
+        brush12 = QBrush(QColor(210, 210, 210, 128))
+        brush12.setStyle(Qt.NoBrush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush12)
+#endif
         palette.setBrush(QPalette.Disabled, QPalette.WindowText, brush4)
         palette.setBrush(QPalette.Disabled, QPalette.Button, brush1)
         palette.setBrush(QPalette.Disabled, QPalette.Light, brush2)
@@ -95,14 +105,19 @@ class Ui_MainWindow(object):
         palette.setBrush(QPalette.Disabled, QPalette.Base, brush1)
         palette.setBrush(QPalette.Disabled, QPalette.Window, brush1)
         palette.setBrush(QPalette.Disabled, QPalette.Shadow, brush7)
-        brush11 = QBrush(QColor(51, 153, 255, 255))
-        brush11.setStyle(Qt.SolidPattern)
-        palette.setBrush(QPalette.Disabled, QPalette.Highlight, brush11)
+        brush13 = QBrush(QColor(51, 153, 255, 255))
+        brush13.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Disabled, QPalette.Highlight, brush13)
         palette.setBrush(QPalette.Disabled, QPalette.Link, brush8)
         palette.setBrush(QPalette.Disabled, QPalette.LinkVisited, brush9)
         palette.setBrush(QPalette.Disabled, QPalette.AlternateBase, brush10)
         palette.setBrush(QPalette.Disabled, QPalette.ToolTipBase, brush10)
         palette.setBrush(QPalette.Disabled, QPalette.ToolTipText, brush6)
+        brush14 = QBrush(QColor(210, 210, 210, 128))
+        brush14.setStyle(Qt.NoBrush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush14)
+#endif
         MainWindow.setPalette(palette)
         font = QFont()
         font.setFamily(u"Segoe UI")
@@ -1035,7 +1050,7 @@ class Ui_MainWindow(object):
         sizePolicy7.setVerticalStretch(0)
         sizePolicy7.setHeightForWidth(self.cbb_sendtype.sizePolicy().hasHeightForWidth())
         self.cbb_sendtype.setSizePolicy(sizePolicy7)
-        self.cbb_sendtype.setMinimumSize(QSize(120, 26))
+        self.cbb_sendtype.setMinimumSize(QSize(120, 28))
         self.cbb_sendtype.setMaximumSize(QSize(120, 26))
 
         self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.cbb_sendtype)
@@ -1050,7 +1065,7 @@ class Ui_MainWindow(object):
         self.le_id.setObjectName(u"le_id")
         sizePolicy7.setHeightForWidth(self.le_id.sizePolicy().hasHeightForWidth())
         self.le_id.setSizePolicy(sizePolicy7)
-        self.le_id.setMinimumSize(QSize(120, 26))
+        self.le_id.setMinimumSize(QSize(120, 28))
         self.le_id.setMaximumSize(QSize(120, 26))
 
         self.formLayout_2.setWidget(1, QFormLayout.FieldRole, self.le_id)
@@ -1063,7 +1078,7 @@ class Ui_MainWindow(object):
 
         self.le_sendnum = QLineEdit(self.frame_5)
         self.le_sendnum.setObjectName(u"le_sendnum")
-        self.le_sendnum.setMinimumSize(QSize(120, 26))
+        self.le_sendnum.setMinimumSize(QSize(120, 28))
         self.le_sendnum.setMaximumSize(QSize(120, 26))
 
         self.formLayout_2.setWidget(2, QFormLayout.FieldRole, self.le_sendnum)
@@ -1083,7 +1098,7 @@ class Ui_MainWindow(object):
 
         self.le_sendinterval = QLineEdit(self.frame_5)
         self.le_sendinterval.setObjectName(u"le_sendinterval")
-        self.le_sendinterval.setMinimumSize(QSize(0, 26))
+        self.le_sendinterval.setMinimumSize(QSize(0, 28))
         self.le_sendinterval.setMaximumSize(QSize(150, 26))
 
         self.formLayout_3.setWidget(0, QFormLayout.FieldRole, self.le_sendinterval)
@@ -1096,7 +1111,7 @@ class Ui_MainWindow(object):
 
         self.le_data = QLineEdit(self.frame_5)
         self.le_data.setObjectName(u"le_data")
-        self.le_data.setMinimumSize(QSize(180, 26))
+        self.le_data.setMinimumSize(QSize(180, 28))
         self.le_data.setMaximumSize(QSize(180, 26))
 
         self.formLayout_3.setWidget(1, QFormLayout.FieldRole, self.le_data)
@@ -2770,7 +2785,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 274, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 222, 222))
         self.horizontalLayout_11 = QHBoxLayout(self.scrollAreaWidgetContents)
         self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
         self.plainTextEdit = QPlainTextEdit(self.scrollAreaWidgetContents)
@@ -2909,25 +2924,40 @@ class Ui_MainWindow(object):
         self.tableWidget.setSizePolicy(sizePolicy)
         palette1 = QPalette()
         palette1.setBrush(QPalette.Active, QPalette.WindowText, brush6)
-        brush12 = QBrush(QColor(39, 44, 54, 255))
-        brush12.setStyle(Qt.SolidPattern)
-        palette1.setBrush(QPalette.Active, QPalette.Button, brush12)
+        brush15 = QBrush(QColor(39, 44, 54, 255))
+        brush15.setStyle(Qt.SolidPattern)
+        palette1.setBrush(QPalette.Active, QPalette.Button, brush15)
         palette1.setBrush(QPalette.Active, QPalette.Text, brush6)
         palette1.setBrush(QPalette.Active, QPalette.ButtonText, brush6)
-        palette1.setBrush(QPalette.Active, QPalette.Base, brush12)
-        palette1.setBrush(QPalette.Active, QPalette.Window, brush12)
+        palette1.setBrush(QPalette.Active, QPalette.Base, brush15)
+        palette1.setBrush(QPalette.Active, QPalette.Window, brush15)
+        brush16 = QBrush(QColor(210, 210, 210, 128))
+        brush16.setStyle(Qt.NoBrush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette.Active, QPalette.PlaceholderText, brush16)
+#endif
         palette1.setBrush(QPalette.Inactive, QPalette.WindowText, brush6)
-        palette1.setBrush(QPalette.Inactive, QPalette.Button, brush12)
+        palette1.setBrush(QPalette.Inactive, QPalette.Button, brush15)
         palette1.setBrush(QPalette.Inactive, QPalette.Text, brush6)
         palette1.setBrush(QPalette.Inactive, QPalette.ButtonText, brush6)
-        palette1.setBrush(QPalette.Inactive, QPalette.Base, brush12)
-        palette1.setBrush(QPalette.Inactive, QPalette.Window, brush12)
+        palette1.setBrush(QPalette.Inactive, QPalette.Base, brush15)
+        palette1.setBrush(QPalette.Inactive, QPalette.Window, brush15)
+        brush17 = QBrush(QColor(210, 210, 210, 128))
+        brush17.setStyle(Qt.NoBrush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush17)
+#endif
         palette1.setBrush(QPalette.Disabled, QPalette.WindowText, brush6)
-        palette1.setBrush(QPalette.Disabled, QPalette.Button, brush12)
+        palette1.setBrush(QPalette.Disabled, QPalette.Button, brush15)
         palette1.setBrush(QPalette.Disabled, QPalette.Text, brush6)
         palette1.setBrush(QPalette.Disabled, QPalette.ButtonText, brush6)
-        palette1.setBrush(QPalette.Disabled, QPalette.Base, brush12)
-        palette1.setBrush(QPalette.Disabled, QPalette.Window, brush12)
+        palette1.setBrush(QPalette.Disabled, QPalette.Base, brush15)
+        palette1.setBrush(QPalette.Disabled, QPalette.Window, brush15)
+        brush18 = QBrush(QColor(210, 210, 210, 128))
+        brush18.setStyle(Qt.NoBrush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush18)
+#endif
         self.tableWidget.setPalette(palette1)
         self.tableWidget.setStyleSheet(u"QTableWidget {	\n"
 "	background-color: rgb(39, 44, 54);\n"

@@ -75,6 +75,12 @@ class UiControl(QObject):
         # Motor2 Temperature进度条初始化
         self.mw.ui.pb_motor2temp.setMinMaxValue(-40, 170)
         self.mw.ui.pb_motor2temp.setUnit('℃')
+        # Air Pressure1进度条初始化
+        self.mw.ui.pb_airpressure1.setMinMaxValue(0, 1)
+        self.mw.ui.pb_airpressure1.setUnit('kPa')
+        # Air Pressure2进度条初始化
+        self.mw.ui.pb_airpressure2.setMinMaxValue(0, 1)
+        self.mw.ui.pb_airpressure2.setUnit('kPa')
 
     def msgUiDisplay(self, msgs):
         # TODO：增加DBC解析信号功能
