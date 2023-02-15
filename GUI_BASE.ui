@@ -182,15 +182,6 @@
        </color>
       </brush>
      </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="NoBrush">
-       <color alpha="128">
-        <red>210</red>
-        <green>210</green>
-        <blue>210</blue>
-       </color>
-      </brush>
-     </colorrole>
     </active>
     <inactive>
      <colorrole role="WindowText">
@@ -355,15 +346,6 @@
        </color>
       </brush>
      </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="NoBrush">
-       <color alpha="128">
-        <red>210</red>
-        <green>210</green>
-        <blue>210</blue>
-       </color>
-      </brush>
-     </colorrole>
     </inactive>
     <disabled>
      <colorrole role="WindowText">
@@ -522,15 +504,6 @@
      <colorrole role="ToolTipText">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>210</red>
-        <green>210</green>
-        <blue>210</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="NoBrush">
-       <color alpha="128">
         <red>210</red>
         <green>210</green>
         <blue>210</blue>
@@ -2046,11 +2019,11 @@ QHeaderView::section:vertical
                         <attribute name="horizontalHeaderCascadingSectionResizes">
                          <bool>false</bool>
                         </attribute>
-                        <attribute name="horizontalHeaderMinimumSectionSize">
-                         <number>60</number>
-                        </attribute>
                         <attribute name="horizontalHeaderDefaultSectionSize">
                          <number>100</number>
+                        </attribute>
+                        <attribute name="horizontalHeaderMinimumSectionSize">
+                         <number>60</number>
                         </attribute>
                         <attribute name="horizontalHeaderStretchLastSection">
                          <bool>true</bool>
@@ -2226,6 +2199,9 @@ QHeaderView::section:vertical
                                  <width>120</width>
                                  <height>26</height>
                                 </size>
+                               </property>
+                               <property name="inputMask">
+                                <string>9</string>
                                </property>
                                <property name="text">
                                 <string>1</string>
@@ -6030,8 +6006,8 @@ QScrollBar:horizontal {
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>222</width>
-                              <height>222</height>
+                              <width>218</width>
+                              <height>218</height>
                              </rect>
                             </property>
                             <layout class="QHBoxLayout" name="horizontalLayout_11">
@@ -6279,15 +6255,6 @@ QCommandLinkButton:pressed {
                               </color>
                              </brush>
                             </colorrole>
-                            <colorrole role="PlaceholderText">
-                             <brush brushstyle="NoBrush">
-                              <color alpha="128">
-                               <red>210</red>
-                               <green>210</green>
-                               <blue>210</blue>
-                              </color>
-                             </brush>
-                            </colorrole>
                            </active>
                            <inactive>
                             <colorrole role="WindowText">
@@ -6344,15 +6311,6 @@ QCommandLinkButton:pressed {
                               </color>
                              </brush>
                             </colorrole>
-                            <colorrole role="PlaceholderText">
-                             <brush brushstyle="NoBrush">
-                              <color alpha="128">
-                               <red>210</red>
-                               <green>210</green>
-                               <blue>210</blue>
-                              </color>
-                             </brush>
-                            </colorrole>
                            </inactive>
                            <disabled>
                             <colorrole role="WindowText">
@@ -6406,15 +6364,6 @@ QCommandLinkButton:pressed {
                                <red>39</red>
                                <green>44</green>
                                <blue>54</blue>
-                              </color>
-                             </brush>
-                            </colorrole>
-                            <colorrole role="PlaceholderText">
-                             <brush brushstyle="NoBrush">
-                              <color alpha="128">
-                               <red>210</red>
-                               <green>210</green>
-                               <blue>210</blue>
                               </color>
                              </brush>
                             </colorrole>

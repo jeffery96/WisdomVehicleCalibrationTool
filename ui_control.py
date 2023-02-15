@@ -1,6 +1,7 @@
 from PySide2.QtCore import Qt, QObject, Signal
 from PySide2.QtWidgets import QTableWidgetItem
 from zlgcan import ZCAN_Receive_Data
+import time
 from main import *
 
 
@@ -19,19 +20,37 @@ class UiControl(QObject):
         self.TableUpdateSignal.connect(self.msgTablewDisplay)
         self.msg_signal.connect(self.msgUiDisplay)
 
+        # info_pte右键菜单初始化
         def infoPteContext():
             menu = QMenu()
             clearAllAct = menu.addAction("清空全部")
-            clearAllAct.triggered.connect(infoPteClearAll)
+            clearAllAct.triggered.connect(self.pteClearAll)
             menu.exec_(QCursor.pos())
 
         self.mw.ui.pte_info.setContextMenuPolicy(Qt.CustomContextMenu)
         self.mw.ui.pte_info.customContextMenuRequested.connect(infoPteContext)
 
-        def infoPteClearAll():
-            self.mw.ui.pte_info.clear()
+        def tablewContext():
+            menu = QMenu()
+            clearAllAct = menu.addAction("清空全部")
+            saveAllAct = menu.addAction('保存报文')
+            clearAllAct.triggered.connect(self.tblwClearAllRow)
+            saveAllAct.triggered.connect(self.tblwSaveAllRow)
+            menu.exec_(QCursor.pos())
+
+        self.mw.ui.tablew_msgdisplay.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.mw.ui.tablew_msgdisplay.customContextMenuRequested.connect(
+            tablewContext)
 
     def uiInit(self):
+        self.mw.ui.tableWidget.horizontalHeader().setSectionResizeMode(
+            QtWidgets.QHeaderView.Stretch)
+        self.mw.ui.tablew_msgdisplay.horizontalHeader().resizeSection(0, 60)
+        self.mw.ui.tablew_msgdisplay.horizontalHeader().resizeSection(1, 120)
+        self.mw.ui.tablew_msgdisplay.horizontalHeader().resizeSection(2, 120)
+        self.mw.ui.tablew_msgdisplay.horizontalHeader().resizeSection(3, 60)
+        self.mw.ui.tablew_msgdisplay.horizontalHeader().resizeSection(4, 60)
+
         # Motor Speed仪表盘初始化
         self.mw.ui.gp_motorspeed.setMinMaxValue(-10000, 10000)
         self.mw.ui.gp_motorspeed.setScaleMainNum(10)
@@ -105,12 +124,13 @@ class UiControl(QObject):
                 case _:
                     pass
 
-            self.mw.ui.pte_info.appendPlainText(f'收到报文\nID:{hex(m.id)}\n数据域:{m.data}\n')
+            self.mw.ui.pte_info.appendPlainText(
+                f'收到报文\nID:{hex(m.id)}\n数据域:{m.data}\n')
             self.msgTablewDisplay(m.time, m.id, m.dir, m.dlc, m.data)
 
     def msgTablewDisplay(self, time, id, dir, dlc, data):
         time = time / 1e6
-        time = str(time) + 's'
+        time = '%.3f' % time  # 用该方法可以保留小数末尾0，round方法无法保存小鼠末尾0
         id = hex(id)
         dir = str(dir)
         dlc = str(dlc)
@@ -138,7 +158,8 @@ class UiControl(QObject):
         item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
         self.mw.ui.tablew_msgdisplay.setItem(table_row_cnt, 4, item)
 
-        self.mw.ui.tablew_msgdisplay.setItem(table_row_cnt, 5, QTableWidgetItem(data))
+        self.mw.ui.tablew_msgdisplay.setItem(
+            table_row_cnt, 5, QTableWidgetItem(data))
         self.mw.ui.tablew_msgdisplay.scrollToBottom()
 
     def infoPteDisplay(self, msgs):
@@ -147,8 +168,10 @@ class UiControl(QObject):
         for nm in new_msgs:
             match nm.id:
                 case 0x18ffe6a5:
-                    self.mw.ui.pte_info.appendPlainText(f'收到报文,id:{hex(nm.id)},data:{nm.data}')
-                    self.msgTablewDisplay(nm.time, nm.id, nm.dir, nm.dlc, nm.data)
+                    self.mw.ui.pte_info.appendPlainText(
+                        f'收到报文,id:{hex(nm.id)},data:{nm.data}')
+                    self.msgTablewDisplay(
+                        nm.time, nm.id, nm.dir, nm.dlc, nm.data)
                     pass
 
                 case 0x18ffe6a6:
@@ -160,6 +183,7 @@ class UiControl(QObject):
                 case _:
                     # self.mw.ui.pte_info.appendPlainText('收到未知报文')
                     pass
+
     @staticmethod
     def msgConvert(msg: ZCAN_Receive_Data):
         class NewFrame:
@@ -173,7 +197,7 @@ class UiControl(QObject):
             def getBits(self, startbit, len):
                 data_in_64bits = 0
                 for i, B in enumerate(self.Bytes):
-                    data_in_64bits = data_in_64bits + (B << i*8)
+                    data_in_64bits = data_in_64bits + (B << i * 8)
 
                 res = int(bin(data_in_64bits)[::-1][startbit:len][::-1], 2)
                 return res
@@ -191,3 +215,31 @@ class UiControl(QObject):
     def getMsgSignal(self, startbit, length):
         pass
 
+    # 右键菜单动作
+    def tblwClearAllRow(self):
+        row_num = self.mw.ui.tablew_msgdisplay.rowCount()
+        for i in range(0, row_num)[::-1]:
+            self.mw.ui.tablew_msgdisplay.removeRow(i)
+
+    def tblwSaveAllRow(self):
+        pass
+
+        header = 'data ' + time.ctime() + '\nbase hex timestamps absolute' + '\ninternal events logged' + \
+            '\n// version 7.2.0' + '\nBegin Triggerblock ' + time.ctime() + '\n0.000000 Start of measurement\n'
+        row_num = self.mw.ui.tablew_msgdisplay.rowCount()
+        col_num = self.mw.ui.tablew_msgdisplay.columnCount()
+        items = [self.mw.ui.tablew_msgdisplay.item(row, col) for row in range(row_num) for col in range(col_num)]
+        items = list(zip(*[iter(items)]*col_num))
+        file_url, _ = QFileDialog.getSaveFileName(None, 'Save File', './', 'Asc (*.asc)')
+        if file_url != '':
+            with open(file_url, 'w') as f:
+                f.write(header)
+
+                for r in items:
+                    for i in r:
+                        f.write(i.text() + '    ')
+                    f.write('\n')
+                pass
+
+    def pteClearAll(self):
+        self.mw.ui.pte_info.clear()

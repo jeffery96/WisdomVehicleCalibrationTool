@@ -20,7 +20,7 @@ from main import *
 from zlgcan import *
 import json
 import threading
-from PySide2.QtCore import Signal, QObject
+from PySide2.QtCore import Signal, QObject, QThread, QTimer
 import datetime
 from ui_control import UiControl
 
@@ -35,7 +35,7 @@ USBCAN_I_II_TYPE = (3, 4)
 class CAN(ZCAN):
     def __init__(self, mainwindow):
         super().__init__()
-        self.mw = mainwindow    # type: MainWindow
+        self.mw = mainwindow  # type: MainWindow
         self._dev_info = None
 
         with open("./dev_info.json", "r") as fd:
@@ -75,12 +75,12 @@ class CAN(ZCAN):
         self._is_sending = False
         self._id_increase = False
         self._send_num = 1
-        self._send_cnt = 1
+        self._send_cnt = 0
         self._is_canfd_msg = False
         self._send_msgs = None
-        self._send_thread = None
+        self._send_timer = None
 
-    def BtnOpenDev_Click(self):
+    def btnOpenDev_Click(self):
         if self._isOpen:
             # 如果设备已打开则关闭设备
             for can_channel in self._can_handle_dict.keys():
@@ -177,7 +177,7 @@ class CAN(ZCAN):
 
             self._isOpen = True
 
-    def BtnCanTrans_Click(self):
+    def btnMsgSend_Click(self):
         # TODO：增加周期发送报文功能
         if self._isOpen:
             msg = ZCAN_Transmit_Data()
@@ -197,24 +197,30 @@ class CAN(ZCAN):
                 else:
                     msg.frame.data[i] = 0
 
-            ret = self._zcan.Transmit(self._can_handle_dict[0], msg, 1)
+            self._send_num = int(self.mw.ui.le_sendnum.text())
+            if self._send_num == 1:
+                ret = self._zcan.Transmit(self._can_handle_dict[0], msg, 1)
+            else:
+                # 使用QTimer精度差，只能基本满足周期发送要求
+                self._send_timer = QTimer()
+                # self._send_timer.setTimerType(Qt.PreciseTimer)
+                self._send_timer.timeout.connect(lambda: self.msgPeriodSendFunc(msg))
+                sendInterval = int(self.mw.ui.le_sendinterval.text())
+                if not self._send_timer.isActive():
+                    self._send_timer.start(sendInterval)
 
-        # msg.frame.data = (
-        #     0x01,
-        #     0x02,
-        #     0x03,
-        #     0x04,
-        #     0x05,
-        #     0x06,
-        #     0x07,
-        #     0x08,
-        # )
-
-        # print(f'发送成功报文数:{ret}')
         else:
             QMessageBox.information(self.mw, f'设备未打开',
                                     f'设备未打开,请先打开设备',
                                     QMessageBox.Ok)
+
+    def msgPeriodSendFunc(self, msg):
+        ret = self._zcan.Transmit(self._can_handle_dict[0], msg, 1)
+        if ret == 1:
+            self._send_cnt += 1
+        if self._send_cnt >= self._send_num:
+            self._send_timer.stop()
+            self._send_cnt = 0
 
     def msgRecvThreadFunc(self):
         while True:
@@ -251,4 +257,3 @@ class CAN(ZCAN):
     #         data = data + str(i) + ' '
     #
     #     self.ms.TableUpdateSignal.emit(time, id, dir, dlc, data)
-

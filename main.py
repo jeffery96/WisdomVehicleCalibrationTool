@@ -177,23 +177,12 @@ class MainWindow(QMainWindow):
         #                                                                      #
         ## ==> USER CODES BELLOW                                              ##
         #######################################################################
-        self.ui.btn_opendevice.clicked.connect(self.can.BtnOpenDev_Click)
-        self.ui.btn_sendmsg.clicked.connect(
-            self.can.BtnCanTrans_Click)
 
+        self.ui.btn_opendevice.clicked.connect(self.can.btnOpenDev_Click)
+        self.ui.btn_sendmsg.clicked.connect(self.can.btnMsgSend_Click)
         # ==> QTableWidget RARAMETERS
         #######################################################################
-        self.ui.tableWidget.horizontalHeader().setSectionResizeMode(
-            QtWidgets.QHeaderView.Stretch)
-        self.ui.tablew_msgdisplay.horizontalHeader().resizeSection(0, 60)
-        self.ui.tablew_msgdisplay.horizontalHeader().resizeSection(1, 120)
-        self.ui.tablew_msgdisplay.horizontalHeader().resizeSection(2, 120)
-        self.ui.tablew_msgdisplay.horizontalHeader().resizeSection(3, 60)
-        self.ui.tablew_msgdisplay.horizontalHeader().resizeSection(4, 60)
 
-        self.ui.tablew_msgdisplay.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.ui.tablew_msgdisplay.customContextMenuRequested.connect(
-            self.tablewContext)
 
         ## ==> END ##
         # self.ui.widget.setValue(0)
@@ -218,26 +207,7 @@ class MainWindow(QMainWindow):
         self.show()
         ## ==> END ##
 
-    def tablewContext(self):
-        menu = QMenu()
-        clearAllAct = menu.addAction("清空全部")
-        saveAllAct = menu.addAction('保存报文')
-        def tblwClearAllRow():
-            row_num = self.ui.tablew_msgdisplay.rowCount()
-            for i in range(0, row_num)[::-1]:
-                self.ui.tablew_msgdisplay.removeRow(i)
 
-        clearAllAct.triggered.connect(tblwClearAllRow)
-
-        def tblwSaveAllRow():
-            fileName = QFileDialog.getSaveFileName(self, ("Save F:xile"),
-                                                   "/home/jana/untitled.png",
-                                                   ("Images (*.png *.xpm *.jpg)"))
-
-        saveAllAct.triggered.connect(tblwSaveAllRow)
-
-        menu.exec_(QCursor.pos())
-        pass
 
     ########################################################################
     # MENUS ==> DYNAMIC MENUS FUNCTIONS
