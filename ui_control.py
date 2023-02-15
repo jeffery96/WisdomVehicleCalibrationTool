@@ -47,8 +47,8 @@ class UiControl(QObject):
             QtWidgets.QHeaderView.Stretch)
         self.mw.ui.tablew_msgdisplay.horizontalHeader().resizeSection(0, 60)
         self.mw.ui.tablew_msgdisplay.horizontalHeader().resizeSection(1, 120)
-        self.mw.ui.tablew_msgdisplay.horizontalHeader().resizeSection(2, 120)
-        self.mw.ui.tablew_msgdisplay.horizontalHeader().resizeSection(3, 60)
+        self.mw.ui.tablew_msgdisplay.horizontalHeader().resizeSection(2, 60)
+        self.mw.ui.tablew_msgdisplay.horizontalHeader().resizeSection(3, 100)
         self.mw.ui.tablew_msgdisplay.horizontalHeader().resizeSection(4, 60)
 
         # Motor Speed仪表盘初始化
@@ -126,15 +126,15 @@ class UiControl(QObject):
 
             self.mw.ui.pte_info.appendPlainText(
                 f'收到报文\nID:{hex(m.id)}\n数据域:{m.data}\n')
-            self.msgTablewDisplay(m.time, m.id, m.dir, m.dlc, m.data)
+            self.msgTablewDisplay(m.time, 1, m.id, m.dir, m.data)
 
-    def msgTablewDisplay(self, time, id, dir, dlc, data):
+    def msgTablewDisplay(self, time, chn, id, dir, data):
         time = time / 1e6
         time = '%.3f' % time  # 用该方法可以保留小数末尾0，round方法无法保存小鼠末尾0
+        chn = str(chn)
         id = hex(id)
         dir = str(dir)
-        dlc = str(dlc)
-        data = str(data)
+        data = ''.join(['%02X' % d + ' ' for d in data])[:-1]
         table_row_cnt = self.mw.ui.tablew_msgdisplay.rowCount()
         self.mw.ui.tablew_msgdisplay.insertRow(table_row_cnt)
         # 序号
@@ -145,44 +145,22 @@ class UiControl(QObject):
         item = QTableWidgetItem(time)
         item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
         self.mw.ui.tablew_msgdisplay.setItem(table_row_cnt, 1, item)
+        # 通道
+        item = QTableWidgetItem(chn)
+        item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        self.mw.ui.tablew_msgdisplay.setItem(table_row_cnt, 2, item)
         # ID
         item = QTableWidgetItem(id)
         item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-        self.mw.ui.tablew_msgdisplay.setItem(table_row_cnt, 2, item)
+        self.mw.ui.tablew_msgdisplay.setItem(table_row_cnt, 3, item)
         # 方向
         item = QTableWidgetItem(dir)
-        item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-        self.mw.ui.tablew_msgdisplay.setItem(table_row_cnt, 3, item)
-        # 长度
-        item = QTableWidgetItem(dlc)
         item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
         self.mw.ui.tablew_msgdisplay.setItem(table_row_cnt, 4, item)
 
         self.mw.ui.tablew_msgdisplay.setItem(
             table_row_cnt, 5, QTableWidgetItem(data))
         self.mw.ui.tablew_msgdisplay.scrollToBottom()
-
-    def infoPteDisplay(self, msgs):
-
-        new_msgs = list(map(self.frameConvert, msgs))
-        for nm in new_msgs:
-            match nm.id:
-                case 0x18ffe6a5:
-                    self.mw.ui.pte_info.appendPlainText(
-                        f'收到报文,id:{hex(nm.id)},data:{nm.data}')
-                    self.msgTablewDisplay(
-                        nm.time, nm.id, nm.dir, nm.dlc, nm.data)
-                    pass
-
-                case 0x18ffe6a6:
-                    # self.mw.ui.pte_info.appendPlainText(f'收到报文,id:{hex(nm.id)},data:{nm.data}')
-                    pass
-                case 0x18ff3d27:
-                    pass
-
-                case _:
-                    # self.mw.ui.pte_info.appendPlainText('收到未知报文')
-                    pass
 
     @staticmethod
     def msgConvert(msg: ZCAN_Receive_Data):
@@ -205,7 +183,7 @@ class UiControl(QObject):
         nf = NewFrame()
         nf.id = msg.frame.can_id
         nf.time = msg.timestamp
-        nf.dir = 'rx'
+        nf.dir = 'Rx'
         nf.dlc = msg.frame.can_dlc
         nf.data = list(msg.frame.data)
         nf.Bytes = nf.data
@@ -229,17 +207,19 @@ class UiControl(QObject):
         row_num = self.mw.ui.tablew_msgdisplay.rowCount()
         col_num = self.mw.ui.tablew_msgdisplay.columnCount()
         items = [self.mw.ui.tablew_msgdisplay.item(row, col) for row in range(row_num) for col in range(col_num)]
-        items = list(zip(*[iter(items)]*col_num))
-        file_url, _ = QFileDialog.getSaveFileName(None, 'Save File', './', 'Asc (*.asc)')
+        items = list(zip(*[iter(items)] * col_num))
+        file_url, _ = QFileDialog.getSaveFileName(
+            None, 'Save File', './', 'Asc (*.asc)')
         if file_url != '':
             with open(file_url, 'w') as f:
                 f.write(header)
-
                 for r in items:
-                    for i in r:
-                        f.write(i.text() + '    ')
+                    f.write(
+                        f'{r[1].text()}      {r[2].text()}          {r[3].text()[2:]}x'
+                        f'     {r[4].text()}     d 8 {r[5].text()}')
                     f.write('\n')
-                pass
+
+                f.write('End TriggerBlock')
 
     def pteClearAll(self):
         self.mw.ui.pte_info.clear()

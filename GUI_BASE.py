@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'GUI_BASEEpyGYj.ui'
+## Form generated from reading UI file 'GUI_BASEqPQGdW.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -1111,7 +1111,7 @@ class Ui_MainWindow(object):
 
         self.le_data = QLineEdit(self.frame_5)
         self.le_data.setObjectName(u"le_data")
-        self.le_data.setMinimumSize(QSize(180, 28))
+        self.le_data.setMinimumSize(QSize(210, 28))
         self.le_data.setMaximumSize(QSize(180, 26))
 
         self.formLayout_3.setWidget(1, QFormLayout.FieldRole, self.le_data)
@@ -3177,11 +3177,11 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem1 = self.tablew_msgdisplay.horizontalHeaderItem(1)
         ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"\u65f6\u95f4", None));
         ___qtablewidgetitem2 = self.tablew_msgdisplay.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"ID", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"\u901a\u9053", None));
         ___qtablewidgetitem3 = self.tablew_msgdisplay.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"\u65b9\u5411", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"ID", None));
         ___qtablewidgetitem4 = self.tablew_msgdisplay.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"\u957f\u5ea6", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"\u65b9\u5411", None));
         ___qtablewidgetitem5 = self.tablew_msgdisplay.horizontalHeaderItem(5)
         ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"\u6570\u636e", None));
         self.label_sendtype.setText(QCoreApplication.translate("MainWindow", u"\u53d1\u9001\u65b9\u5f0f:", None))
@@ -3192,6 +3192,7 @@ class Ui_MainWindow(object):
         self.label_id.setText(QCoreApplication.translate("MainWindow", u"\u62a5\u6587ID:", None))
         self.le_id.setText(QCoreApplication.translate("MainWindow", u"0x18ffe6a5", None))
         self.label_sendnum.setText(QCoreApplication.translate("MainWindow", u"\u53d1\u9001\u6b21\u6570:", None))
+        self.le_sendnum.setInputMask("")
         self.le_sendnum.setText(QCoreApplication.translate("MainWindow", u"1", None))
         self.label_sendinterval.setText(QCoreApplication.translate("MainWindow", u"\u53d1\u9001\u95f4\u9694:", None))
         self.le_sendinterval.setText(QCoreApplication.translate("MainWindow", u"10", None))

@@ -178,7 +178,7 @@ class CAN(ZCAN):
             self._isOpen = True
 
     def btnMsgSend_Click(self):
-        # TODO：增加周期发送报文功能
+        # TODO: 优化使用QTimer周期发送精度不高的问题
         if self._isOpen:
             msg = ZCAN_Transmit_Data()
             msg.transmit_type = self.mw.ui.cbb_sendtype.currentIndex()

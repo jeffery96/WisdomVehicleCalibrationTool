@@ -17,8 +17,8 @@ class IndicatorLight(QWidget):
         self._sampleTime = 100
         self._lightMode = 0  # 0：常亮  1：闪烁
         self._isLightOn = False  # 灯状态
-        self._twinkleInterval = 500
-        self._twinkleCurrentState = True  # 灯闪烁当前状态
+        self._blinkInterval = 500
+        self._blinkCurrentState = True  # 灯闪烁当前状态
         self._sampleCount = 0
 
         self.timer = QTimer()  # 窗口重绘定时器
@@ -36,7 +36,7 @@ class IndicatorLight(QWidget):
         self._lightMode = lightMode
 
     def setTwinkleInterval(self, interval):
-        self._twinkleInterval = interval
+        self._blinkInterval = interval
 
     def paintEvent(self, event):
         side = min(self.width(), self.height())
@@ -86,10 +86,10 @@ class IndicatorLight(QWidget):
         # 绘制灯
         if self._isLightOn:
             if self._lightMode == 1:
-                if self._sampleTime * self._sampleCount % self._twinkleInterval == 0:
-                    self._twinkleCurrentState = not self._twinkleCurrentState
+                if self._sampleTime * self._sampleCount % self._blinkInterval == 0:
+                    self._blinkCurrentState = not self._blinkCurrentState
 
-                if self._twinkleCurrentState:
+                if self._blinkCurrentState:
                     p.setBrush(lg3)
                 else:
                     p.setBrush(lg4)

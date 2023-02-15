@@ -322,7 +322,9 @@ class MainWindow(QMainWindow):
 
 
 if __name__ == "__main__":
+    QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)  # 自适应分辨率
     app = QApplication(sys.argv)
+
     QtGui.QFontDatabase.addApplicationFont('fonts/segoeui.ttf')
     QtGui.QFontDatabase.addApplicationFont('fonts/segoeuib.ttf')
     mw = MainWindow()
