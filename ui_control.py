@@ -43,6 +43,7 @@ class UiControl(QObject):
             tablewContext)
 
     def uiInit(self):
+        # 报文显示表格Table Widget初始化
         self.mw.ui.tableWidget.horizontalHeader().setSectionResizeMode(
             QtWidgets.QHeaderView.Stretch)
         self.mw.ui.tablew_msgdisplay.horizontalHeader().resizeSection(0, 60)
@@ -100,6 +101,22 @@ class UiControl(QObject):
         # Air Pressure2进度条初始化
         self.mw.ui.pb_airpressure2.setMinMaxValue(0, 1)
         self.mw.ui.pb_airpressure2.setUnit('kPa')
+
+        import pyqtgraph as pg
+        import numpy as np
+        pg.setConfigOptions(antialias=True, background=QColor(39, 44, 54))
+        pg_layout = pg.GraphicsLayoutWidget()
+        self.mw.ui.verticalLayout_graph.addWidget(pg_layout)
+        pg.setConfigOptions(antialias=True)  # Enable antialiasing for prettier plots
+        p1 = pg_layout.addPlot(title="Basic array plotting", y=np.random.normal(size=100))
+        pg_layout.nextRow()
+        p2 = pg_layout.addPlot(title="Multiple curves")
+        p2.plot(np.random.normal(size=100), pen=(255, 0, 0), name="Red curve")
+        p2.plot(np.random.normal(size=110) + 5, pen=(0, 255, 0), name="Green curve")
+        p2.plot(np.random.normal(size=120) + 10, pen=(0, 0, 255), name="Blue curve")
+        pg_layout.nextRow()
+        p3 = pg_layout.addPlot(title="Drawing with points")
+        p3.plot(np.random.normal(size=100), pen=(200, 200, 200), symbolBrush=(255, 0, 0), symbolPen='w')
 
     def msgUiDisplay(self, msgs):
         # TODO：增加DBC解析信号功能
@@ -200,8 +217,7 @@ class UiControl(QObject):
             self.mw.ui.tablew_msgdisplay.removeRow(i)
 
     def tblwSaveAllRow(self):
-        pass
-
+        # 右键保存报文为asc格式
         header = 'data ' + time.ctime() + '\nbase hex timestamps absolute' + '\ninternal events logged' + \
             '\n// version 7.2.0' + '\nBegin Triggerblock ' + time.ctime() + '\n0.000000 Start of measurement\n'
         row_num = self.mw.ui.tablew_msgdisplay.rowCount()

@@ -96,13 +96,13 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setMinimumWidth(20)
         UIFunctions.addNewMenu(
             self,
-            "主页",
+            "主    页",
             "btn_home",
             "url(:/16x16/icons/16x16/cil-home.png)",
             True)
         UIFunctions.addNewMenu(
             self,
-            "设备",
+            "设    备",
             "btn_device",
             "url(:/16x16/icons/16x16/cil-input.png)",
             True)
@@ -114,15 +114,9 @@ class MainWindow(QMainWindow):
             True)
         UIFunctions.addNewMenu(
             self,
-            "Add User",
-            "btn_new_user",
-            "url(:/16x16/icons/16x16/cil-user-follow.png)",
-            True)
-        UIFunctions.addNewMenu(
-            self,
-            "test",
-            "btn_test",
-            "url(:/16x16/icons/16x16/cil-user-follow.png)",
+            "图    表",
+            "btn_graph",
+            "url(:/16x16/icons/16x16/cil-chart-line.png)",
             True)
         UIFunctions.addNewMenu(
             self,
@@ -221,7 +215,7 @@ class MainWindow(QMainWindow):
         if btnWidget.objectName() == "btn_home":
             self.ui.stackedWidget.setCurrentWidget(self.ui.page_home)
             UIFunctions.resetStyle(self, "btn_home")
-            UIFunctions.labelPage(self, "Home")
+            UIFunctions.labelPage(self, "主 页")
             btnWidget.setStyleSheet(
                 UIFunctions.selectMenu(
                     btnWidget.styleSheet()))
@@ -230,7 +224,7 @@ class MainWindow(QMainWindow):
         if btnWidget.objectName() == "btn_device":
             self.ui.stackedWidget.setCurrentWidget(self.ui.page_device)
             UIFunctions.resetStyle(self, "btn_device")
-            UIFunctions.labelPage(self, "设备")
+            UIFunctions.labelPage(self, "设 备")
             btnWidget.setStyleSheet(
                 UIFunctions.selectMenu(
                     btnWidget.styleSheet()))
@@ -253,6 +247,15 @@ class MainWindow(QMainWindow):
                 UIFunctions.selectMenu(
                     btnWidget.styleSheet()))
 
+        # PAGE GRAPH
+        if btnWidget.objectName() == "btn_graph":
+            self.ui.stackedWidget.setCurrentWidget(self.ui.page_graph)
+            UIFunctions.resetStyle(self, "btn_graph")
+            UIFunctions.labelPage(self, "图 表")
+            btnWidget.setStyleSheet(
+                UIFunctions.selectMenu(
+                    btnWidget.styleSheet()))
+
         # PAGE WIDGETS
         if btnWidget.objectName() == "btn_widgets":
             self.ui.stackedWidget.setCurrentWidget(self.ui.page_widgets)
@@ -262,14 +265,7 @@ class MainWindow(QMainWindow):
                 UIFunctions.selectMenu(
                     btnWidget.styleSheet()))
 
-        # PAGE TEST
-        if btnWidget.objectName() == "btn_test":
-            self.ui.stackedWidget.setCurrentWidget(self.ui.page_test)
-            UIFunctions.resetStyle(self, "btn_test")
-            UIFunctions.labelPage(self, "Custom Widgets")
-            btnWidget.setStyleSheet(
-                UIFunctions.selectMenu(
-                    btnWidget.styleSheet()))
+
 
     ## ==> END ##
 
