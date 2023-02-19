@@ -15,6 +15,7 @@ class UiControl(QObject):
         self.mw = mainwindow  # type: MainWindow
         self.slotInit()
         self.uiInit()
+        self.graphInit()
 
     def slotInit(self):
         self.TableUpdateSignal.connect(self.msgTablewDisplay)
@@ -102,21 +103,48 @@ class UiControl(QObject):
         self.mw.ui.pb_airpressure2.setMinMaxValue(0, 1)
         self.mw.ui.pb_airpressure2.setUnit('kPa')
 
+    def graphInit(self):
         import pyqtgraph as pg
         import numpy as np
         pg.setConfigOptions(antialias=True, background=QColor(39, 44, 54))
-        pg_layout = pg.GraphicsLayoutWidget()
-        self.mw.ui.verticalLayout_graph.addWidget(pg_layout)
+        self.pg_layout = pg.GraphicsLayoutWidget()
+        self.mw.ui.verticalLayout_graph.addWidget(self.pg_layout)
         pg.setConfigOptions(antialias=True)  # Enable antialiasing for prettier plots
-        p1 = pg_layout.addPlot(title="Basic array plotting", y=np.random.normal(size=100))
-        pg_layout.nextRow()
-        p2 = pg_layout.addPlot(title="Multiple curves")
-        p2.plot(np.random.normal(size=100), pen=(255, 0, 0), name="Red curve")
-        p2.plot(np.random.normal(size=110) + 5, pen=(0, 255, 0), name="Green curve")
-        p2.plot(np.random.normal(size=120) + 10, pen=(0, 0, 255), name="Blue curve")
-        pg_layout.nextRow()
-        p3 = pg_layout.addPlot(title="Drawing with points")
+        # data = np.random.normal(size=100)
+        self.p1 = self.pg_layout.addPlot(title="Basic array plotting")
+        self.data = [[], []]
+        self.p1_curve = self.p1.plot(pen=(0, 255, 0), symbol='o')
+        self.pg_layout.nextRow()
+        self.p2 = self.pg_layout.addPlot(title="Multiple curves")
+        self.p2.plot(np.random.normal(size=100), pen=(255, 0, 0), name="Red curve")
+        self.p2.plot(np.random.normal(size=110) + 5, pen=(0, 255, 0), name="Green curve")
+        self.p2.plot(np.random.normal(size=120) + 10, pen=(0, 0, 255), name="Blue curve")
+        self.pg_layout.nextRow()
+        p3 = self.pg_layout.addPlot(title="Drawing with points")
         p3.plot(np.random.normal(size=100), pen=(200, 200, 200), symbolBrush=(255, 0, 0), symbolPen='w')
+
+        vLine = pg.InfiniteLine(angle=90, movable=False)
+        # hLine = pg.InfiniteLine(angle=0, movable=False)
+        self.p1.addItem(vLine, ignoreBounds=True)
+        # p1.addItem(hLine, ignoreBounds=True)
+        vb = self.p1.vb
+
+        def mouseMoved(evt):
+            pos = evt
+            if self.p1.sceneBoundingRect().contains(pos):
+                mousePoint = vb.mapSceneToView(pos)
+                # TODO: 获取离鼠标x坐标最近的那个data X轴数值
+                index = min(self.data[0], key=lambda x: abs(x - mousePoint))
+                # index = int(mousePoint.x())
+                if 0 < index < len(self.data[1]):
+                    print((mousePoint.x(), self.data[1][index]))
+
+                vLine.setPos(mousePoint.x())
+                # hLine.setPos(mousePoint.y())
+
+        # proxy = pg.SignalProxy(p1.scene().sigMouseMoved, rateLimit=60, slot=mouseMoved)
+        self.p1.scene().sigMouseMoved.connect(mouseMoved)
+        pass
 
     def msgUiDisplay(self, msgs):
         # TODO：增加DBC解析信号功能
@@ -124,25 +152,27 @@ class UiControl(QObject):
 
         for m in msgs:
             match m.id:
-                case 0x18ffe6a5:
+                case 0x18FFE6A5:
+                    self.data[0].append(m.time / 1e6)
+                    self.data[1].append(m.getSignal(0, 2))
+                    self.p1_curve.setData(self.data[0], self.data[1])
                     pass
 
-                case 0x18ffe6a6:
+                case 0x18FFE6A6:
                     pass
 
                 case 0x18FF3D27:
-                    Motor1_Speed = m.getBits(0, 16) - 15000
+                    Motor1_Speed = m.getSignal(0, 16) - 15000
                     self.mw.ui.gp_motorspeed.setValue(Motor1_Speed)
 
                 case 0x1884EFF3:
-                    SOC = m.getBits(0, 8) * 0.4
+                    SOC = m.getSignal(0, 8) * 0.4
                     self.mw.ui.pb_soc.setValue(SOC)
 
                 case _:
                     pass
 
-            self.mw.ui.pte_info.appendPlainText(
-                f'收到报文\nID:{hex(m.id)}\n数据域:{m.data}\n')
+            self.mw.ui.pte_info.appendPlainText(f'收到报文\nID:{hex(m.id)}\n数据域:{m.data}\n')
             self.msgTablewDisplay(m.time, 1, m.id, m.dir, m.data)
 
     def msgTablewDisplay(self, time, chn, id, dir, data):
@@ -189,7 +219,9 @@ class UiControl(QObject):
             data = None
             Bytes = None
 
-            def getBits(self, startbit, len):
+            def getSignal(self, startbit, len):
+                # 根据开始位和信号长度获取信号
+                # TODO: 使用了字符串操作，可利用纯数值计算减小计算开销
                 data_in_64bits = 0
                 for i, B in enumerate(self.Bytes):
                     data_in_64bits = data_in_64bits + (B << i * 8)
@@ -207,9 +239,6 @@ class UiControl(QObject):
 
         return nf
 
-    def getMsgSignal(self, startbit, length):
-        pass
-
     # 右键菜单动作
     def tblwClearAllRow(self):
         row_num = self.mw.ui.tablew_msgdisplay.rowCount()
@@ -224,8 +253,7 @@ class UiControl(QObject):
         col_num = self.mw.ui.tablew_msgdisplay.columnCount()
         items = [self.mw.ui.tablew_msgdisplay.item(row, col) for row in range(row_num) for col in range(col_num)]
         items = list(zip(*[iter(items)] * col_num))
-        file_url, _ = QFileDialog.getSaveFileName(
-            None, 'Save File', './', 'Asc (*.asc)')
+        file_url, _ = QFileDialog.getSaveFileName(None, 'Save File', './', 'Asc (*.asc)')
         if file_url != '':
             with open(file_url, 'w') as f:
                 f.write(header)

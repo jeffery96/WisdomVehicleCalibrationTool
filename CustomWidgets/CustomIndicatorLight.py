@@ -6,7 +6,11 @@ import sys
 
 
 class IndicatorLight(QWidget):
-    # TODO： 增加三种状态显示功能，灯灭、红灯故障、绿灯正常
+
+    STANDBY = 0
+    NORMAL = 1
+    FAULT = 2
+
     def __init__(self, parent=None):
         super().__init__(parent=parent)
 
@@ -17,7 +21,9 @@ class IndicatorLight(QWidget):
         self._sampleTime = 100
         self._lightMode = 0  # 0：常亮  1：闪烁
         self._isLightOn = False  # 灯状态
+        self._lightStatus = self.STANDBY
         self._blinkInterval = 500
+
         self._blinkCurrentState = True  # 灯闪烁当前状态
         self._sampleCount = 0
 
@@ -29,13 +35,13 @@ class IndicatorLight(QWidget):
         # 设置控件UI刷新时间
         self._sampleTime = sampleTime
 
-    def setLightOn(self, isChecked):
-        self._isLightOn = isChecked
+    def setLightStatus(self, lightStatus):
+        self._lightStatus = lightStatus
 
     def setLightMode(self, lightMode):
         self._lightMode = lightMode
 
-    def setTwinkleInterval(self, interval):
+    def setBlinkInterval(self, interval):
         self._blinkInterval = interval
 
     def paintEvent(self, event):
@@ -68,8 +74,14 @@ class IndicatorLight(QWidget):
 
         # 灯亮颜色
         lg3 = QLinearGradient(-radius * 0.84, 0, radius * 0.84, 0)
-        lg3.setColorAt(0, QColor(0, 255, 0))
-        lg3.setColorAt(1, QColor(0, 195, 0))
+        if self._lightStatus == self.FAULT:
+            # 红色灯表示故障
+            lg3.setColorAt(0, QColor(255, 0, 0))
+            lg3.setColorAt(1, QColor(125, 0, 0))
+        else:
+            # 绿色灯表示正常
+            lg3.setColorAt(0, QColor(0, 255, 0))
+            lg3.setColorAt(1, QColor(0, 195, 0))
 
         # 灯灭颜色
         lg4 = QLinearGradient(-radius * 0.84, 0, radius * 0.84, 0)
@@ -84,7 +96,7 @@ class IndicatorLight(QWidget):
         p.drawEllipse(QPoint(0, 0), radius*0.92, radius*0.92)
 
         # 绘制灯
-        if self._isLightOn:
+        if self._lightStatus != self.STANDBY:
             if self._lightMode == 1:
                 if self._sampleTime * self._sampleCount % self._blinkInterval == 0:
                     self._blinkCurrentState = not self._blinkCurrentState

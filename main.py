@@ -63,34 +63,23 @@ class MainWindow(QMainWindow):
         print('System: ' + platform.system())
         print('Version: ' + platform.release())
 
-        #######################################################################
-        # START - WINDOW ATTRIBUTES
-        #######################################################################
-
         # REMOVE ==> STANDARD TITLE BAR
         UIFunctions.removeTitleBar(True)
-        ## ==> END ##
 
         # SET ==> WINDOW TITLE
         self.setWindowTitle('Vehicle Calibration Tool - v0.1')
         UIFunctions.labelTitle(self, 'Vehicle Calibration Tool - v0.1')
         UIFunctions.labelDescription(self, 'Set text')
-        ## ==> END ##
 
         # WINDOW SIZE ==> DEFAULT SIZE
         startSize = QSize(1000, 720)
         self.resize(startSize)
         self.setMinimumSize(startSize)
         # UIFunctions.enableMaximumSize(self, 500, 720)
-        ## ==> END ##
-
-        # ==> CREATE MENUS
-        #######################################################################
 
         # ==> TOGGLE MENU SIZE
         self.ui.btn_toggle_menu.clicked.connect(
             lambda: UIFunctions.toggleMenu(self, 220, True))
-        ## ==> END ##
 
         # ==> ADD CUSTOM MENUS
         self.ui.stackedWidget.setMinimumWidth(20)
@@ -124,23 +113,17 @@ class MainWindow(QMainWindow):
             "btn_widgets",
             "url(:/16x16/icons/16x16/cil-equalizer.png)",
             False)
-        ## ==> END ##
 
         # START MENU => SELECTION
         UIFunctions.selectStandardMenu(self, "btn_home")
-        ## ==> END ##
 
         # ==> START PAGE
         self.ui.stackedWidget.setCurrentWidget(self.ui.page_home)
-        ## ==> END ##
 
         # USER ICON ==> SHOW HIDE
         UIFunctions.userIcon(self, "WM", "", True)
-        ## ==> END ##
 
         # ==> MOVE WINDOW / MAXIMIZE / RESTORE
-        #######################################################################
-
         def moveWindow(event):
             # IF MAXIMIZED CHANGE TO NORMAL
             if UIFunctions.returStatus() == 1:
@@ -154,58 +137,15 @@ class MainWindow(QMainWindow):
 
         # WIDGET TO MOVE
         self.ui.frame_label_top_btns.mouseMoveEvent = moveWindow
-        ## ==> END ##
 
         # ==> LOAD DEFINITIONS
         #######################################################################
         UIFunctions.uiDefinitions(self)
-        ## ==> END ##
-
-        #######################################################################
-        # END - WINDOW ATTRIBUTES
-        ############################## ---/--/--- #############################
-
-        #######################################################################
-        #                                                                      #
-        ## START -------------- WIDGETS FUNCTIONS/PARAMETERS ---------------- ##
-        #                                                                      #
-        ## ==> USER CODES BELLOW                                              ##
-        #######################################################################
 
         self.ui.btn_opendevice.clicked.connect(self.can.btnOpenDev_Click)
         self.ui.btn_sendmsg.clicked.connect(self.can.btnMsgSend_Click)
-        # ==> QTableWidget RARAMETERS
-        #######################################################################
 
-
-        ## ==> END ##
-        # self.ui.widget.setValue(0)
-        # self.ui.widget.setMinMaxValue(0, 3000)
-        # self.ui.widget.setScaleMainNum(10)
-        # self.ui.widget.setScaleSubNum(5)
-        # self.ui.widget.setTitle('x100rpm')
-        # # # self.ui.widget.setStyleSheet("background-color: rgb(255,255,255);")
-        # self.ui.horizontalSlider_2.setRange(0, 3000)
-        # self.ui.horizontalSlider_2.valueChanged.connect(
-        #     lambda: self.ui.widget.setValue(
-        #         self.ui.horizontalSlider_2.value()))
-
-        #######################################################################
-        #                                                                      #
-        ## END --------------- WIDGETS FUNCTIONS/PARAMETERS ----------------- ##
-        #                                                                      #
-        ############################## ---/--/--- #############################
-
-        # SHOW ==> MAIN WINDOW
-        #######################################################################
         self.show()
-        ## ==> END ##
-
-
-
-    ########################################################################
-    # MENUS ==> DYNAMIC MENUS FUNCTIONS
-    ########################################################################
 
     def Button(self):
         # GET BT CLICKED
