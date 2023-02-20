@@ -1,4 +1,4 @@
-from PySide2.QtCore import Qt, QObject, Signal
+from PySide2.QtCore import Qt, QObject, Signal, QPointF
 from PySide2.QtWidgets import QTableWidgetItem
 from zlgcan import ZCAN_Receive_Data
 import time
@@ -133,13 +133,17 @@ class UiControl(QObject):
             pos = evt
             if self.p1.sceneBoundingRect().contains(pos):
                 mousePoint = vb.mapSceneToView(pos)
-                # TODO: 获取离鼠标x坐标最近的那个data X轴数值
-                index = min(self.data[0], key=lambda x: abs(x - mousePoint))
-                # index = int(mousePoint.x())
-                if 0 < index < len(self.data[1]):
-                    print((mousePoint.x(), self.data[1][index]))
-
-                vLine.setPos(mousePoint.x())
+                if len(self.data[0]) > 0:
+                    index = self.data[0].index(min(self.data[0], key=lambda x: abs(x - mousePoint.x())))
+                    # index = int(mousePoint.x())
+                    if 0 < index < len(self.data[1]):
+                        print((mousePoint.x(), self.data[0][index], self.data[1][index]))
+                    # setPos只接收QPointF，不接收QPoint
+                    point = QPointF(self.data[0][index], self.data[1][index])
+                    vLine.setPos(point.x())
+                else:
+                    vLine.setPos(mousePoint.x())
+                # vLine.setPos(mousePoint.x())
                 # hLine.setPos(mousePoint.y())
 
         # proxy = pg.SignalProxy(p1.scene().sigMouseMoved, rateLimit=60, slot=mouseMoved)
