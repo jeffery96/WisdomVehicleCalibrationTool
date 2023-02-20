@@ -113,7 +113,7 @@ class UiControl(QObject):
         # data = np.random.normal(size=100)
         self.p1 = self.pg_layout.addPlot(title="Basic array plotting")
         self.data = [[], []]
-        self.p1_curve = self.p1.plot(pen=(0, 255, 0), symbol='o')
+        self.p1_curve = self.p1.plot(pen=(0, 255, 0), symbol='o', symbolSize=6)
         self.pg_layout.nextRow()
         self.p2 = self.pg_layout.addPlot(title="Multiple curves")
         self.p2.plot(np.random.normal(size=100), pen=(255, 0, 0), name="Red curve")
@@ -128,6 +128,18 @@ class UiControl(QObject):
         self.p1.addItem(vLine, ignoreBounds=True)
         # p1.addItem(hLine, ignoreBounds=True)
         vb = self.p1.vb
+        clearAllAct = vb.menu.addAction('Clear All')
+
+        def clearAllCurve():
+            # 同步清空data列表，防止清空曲线后游标判断出现问题
+            self.data = [[], []]
+            # p1_curve属于PlotDataItem，调用该类下的clear可以直接清除曲线且不需要重新创建一个曲线
+            # 如果直接调用PlotItem下clearPlots则会完全清除整个曲线，此时对该PlotItem实例进行setData会失效，因为该实例已被清除
+            self.p1_curve.clear()
+            # self.p1.clearPlots()
+            # self.p1_curve = self.p1.plot(pen=(0, 255, 0), symbol='o')
+
+        clearAllAct.triggered.connect(clearAllCurve)
 
         def mouseMoved(evt):
             pos = evt
