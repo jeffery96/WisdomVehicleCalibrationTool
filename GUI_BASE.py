@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'GUI_BASEaxwPeX.ui'
+## Form generated from reading UI file 'GUI_BASEXmWlAX.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -16,6 +16,7 @@ from CustomWidgets.CustomGaugePanel import GaugePanel
 from CustomWidgets.CustomProgressBar import ProgressBar
 from CustomWidgets.CustomIndicatorLight import IndicatorLight
 
+import files_rc
 import files_rc
 
 class Ui_MainWindow(object):
@@ -65,6 +66,11 @@ class Ui_MainWindow(object):
         brush10.setStyle(Qt.SolidPattern)
         palette.setBrush(QPalette.Active, QPalette.ToolTipBase, brush10)
         palette.setBrush(QPalette.Active, QPalette.ToolTipText, brush6)
+        brush11 = QBrush(QColor(210, 210, 210, 128))
+        brush11.setStyle(Qt.NoBrush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Active, QPalette.PlaceholderText, brush11)
+#endif
         palette.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
         palette.setBrush(QPalette.Inactive, QPalette.Button, brush1)
         palette.setBrush(QPalette.Inactive, QPalette.Light, brush2)
@@ -83,6 +89,11 @@ class Ui_MainWindow(object):
         palette.setBrush(QPalette.Inactive, QPalette.AlternateBase, brush4)
         palette.setBrush(QPalette.Inactive, QPalette.ToolTipBase, brush10)
         palette.setBrush(QPalette.Inactive, QPalette.ToolTipText, brush6)
+        brush12 = QBrush(QColor(210, 210, 210, 128))
+        brush12.setStyle(Qt.NoBrush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush12)
+#endif
         palette.setBrush(QPalette.Disabled, QPalette.WindowText, brush4)
         palette.setBrush(QPalette.Disabled, QPalette.Button, brush1)
         palette.setBrush(QPalette.Disabled, QPalette.Light, brush2)
@@ -95,14 +106,19 @@ class Ui_MainWindow(object):
         palette.setBrush(QPalette.Disabled, QPalette.Base, brush1)
         palette.setBrush(QPalette.Disabled, QPalette.Window, brush1)
         palette.setBrush(QPalette.Disabled, QPalette.Shadow, brush7)
-        brush11 = QBrush(QColor(51, 153, 255, 255))
-        brush11.setStyle(Qt.SolidPattern)
-        palette.setBrush(QPalette.Disabled, QPalette.Highlight, brush11)
+        brush13 = QBrush(QColor(51, 153, 255, 255))
+        brush13.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Disabled, QPalette.Highlight, brush13)
         palette.setBrush(QPalette.Disabled, QPalette.Link, brush8)
         palette.setBrush(QPalette.Disabled, QPalette.LinkVisited, brush9)
         palette.setBrush(QPalette.Disabled, QPalette.AlternateBase, brush10)
         palette.setBrush(QPalette.Disabled, QPalette.ToolTipBase, brush10)
         palette.setBrush(QPalette.Disabled, QPalette.ToolTipText, brush6)
+        brush14 = QBrush(QColor(210, 210, 210, 128))
+        brush14.setStyle(Qt.NoBrush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush14)
+#endif
         MainWindow.setPalette(palette)
         font = QFont()
         font.setFamily(u"Segoe UI")
@@ -808,6 +824,8 @@ class Ui_MainWindow(object):
         self.formLayout.setWidget(0, QFormLayout.LabelRole, self.lable_devicetype)
 
         self.cbb_devicetype = QComboBox(self.frame_4)
+        self.cbb_devicetype.addItem("")
+        self.cbb_devicetype.addItem("")
         self.cbb_devicetype.addItem("")
         self.cbb_devicetype.addItem("")
         self.cbb_devicetype.setObjectName(u"cbb_devicetype")
@@ -2595,6 +2613,168 @@ class Ui_MainWindow(object):
         self.verticalLayout_39.addLayout(self.verticalLayout_graph)
 
         self.stackedWidget.addWidget(self.page_graph)
+        self.page_download = QWidget()
+        self.page_download.setObjectName(u"page_download")
+        self.page_download.setStyleSheet(u"QFrame {\n"
+"	background-color: rgb(39, 44, 54);\n"
+"	border-radius: 6px;\n"
+"	/*font-family:\"Segoe UI\";*/\n"
+"}\n"
+"QFrame QComboBox{\n"
+"	background-color: rgb(27, 29, 35);\n"
+"	border-radius: 5px;\n"
+"	border: 2px solid rgb(27, 29, 35);\n"
+"	padding: 5px;\n"
+"	padding-left: 10px;\n"
+"}\n"
+"QComboBox:hover{\n"
+"	border: 2px solid rgb(64, 71, 88);\n"
+"}\n"
+"QFrame QComboBox:disabled{\n"
+"	background-color: rgb(57, 65, 80);\n"
+"}\n"
+"QFrame QComboBox QAbstractItemView {\n"
+"	color: rgb(85, 170, 255);	\n"
+"	background-color: rgb(27, 29, 35);\n"
+"	padding: 10px;\n"
+"	selection-background-color: rgb(39, 44, 54);\n"
+"}\n"
+"QFrame QPushButton {\n"
+"	border: 2px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"	background-color: rgb(52, 59, 72);\n"
+"}\n"
+"QFrame QPushButton:hover {\n"
+"	background-color: rgb(57, 65, 80);\n"
+"	border: 2px solid rgb(61, 70, 86);\n"
+"}\n"
+"QFrame QPushButton:pressed {	\n"
+"	background-color: rgb(35, 40, 49);\n"
+"	border: 2px solid rgb(43, 50, 61);\n"
+"}\n"
+"")
+        self.verticalLayout_40 = QVBoxLayout(self.page_download)
+        self.verticalLayout_40.setObjectName(u"verticalLayout_40")
+        self.frame_9 = QFrame(self.page_download)
+        self.frame_9.setObjectName(u"frame_9")
+        sizePolicy5.setHeightForWidth(self.frame_9.sizePolicy().hasHeightForWidth())
+        self.frame_9.setSizePolicy(sizePolicy5)
+        self.frame_9.setFrameShape(QFrame.StyledPanel)
+        self.frame_9.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_38 = QVBoxLayout(self.frame_9)
+        self.verticalLayout_38.setSpacing(7)
+        self.verticalLayout_38.setObjectName(u"verticalLayout_38")
+        self.gridLayout_3 = QGridLayout()
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.gridLayout_3.setContentsMargins(-1, -1, -1, 0)
+        self.SelectHexFile_le = QLineEdit(self.frame_9)
+        self.SelectHexFile_le.setObjectName(u"SelectHexFile_le")
+        self.SelectHexFile_le.setMinimumSize(QSize(0, 30))
+        self.SelectHexFile_le.setStyleSheet(u"QLineEdit {\n"
+"	background-color: rgb(27, 29, 35);\n"
+"	border-radius: 5px;\n"
+"	border: 2px solid rgb(27, 29, 35);\n"
+"	padding-left: 10px;\n"
+"}\n"
+"QLineEdit:hover {\n"
+"	border: 2px solid rgb(64, 71, 88);\n"
+"}\n"
+"QLineEdit:focus {\n"
+"	border: 2px solid rgb(91, 101, 124);\n"
+"}")
+        self.SelectHexFile_le.setReadOnly(False)
+
+        self.gridLayout_3.addWidget(self.SelectHexFile_le, 0, 0, 1, 1)
+
+        self.SelectHexFile_btn = QPushButton(self.frame_9)
+        self.SelectHexFile_btn.setObjectName(u"SelectHexFile_btn")
+        self.SelectHexFile_btn.setMinimumSize(QSize(150, 30))
+        font9 = QFont()
+        font9.setFamily(u"Segoe UI")
+        font9.setPointSize(9)
+        font9.setBold(True)
+        font9.setWeight(75)
+        self.SelectHexFile_btn.setFont(font9)
+        self.SelectHexFile_btn.setStyleSheet(u"QPushButton {\n"
+"	border: 2px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"	background-color: rgb(52, 59, 72);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(57, 65, 80);\n"
+"	border: 2px solid rgb(61, 70, 86);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(35, 40, 49);\n"
+"	border: 2px solid rgb(43, 50, 61);\n"
+"}")
+        icon3 = QIcon()
+        icon3.addFile(u":/16x16/icons/16x16/cil-folder-open.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.SelectHexFile_btn.setIcon(icon3)
+
+        self.gridLayout_3.addWidget(self.SelectHexFile_btn, 0, 1, 1, 1)
+
+        self.HexFileInfo_lb = QLabel(self.frame_9)
+        self.HexFileInfo_lb.setObjectName(u"HexFileInfo_lb")
+        self.HexFileInfo_lb.setStyleSheet(u"color: rgb(98, 103, 111);")
+        self.HexFileInfo_lb.setLineWidth(1)
+        self.HexFileInfo_lb.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.gridLayout_3.addWidget(self.HexFileInfo_lb, 1, 0, 1, 2)
+
+
+        self.verticalLayout_38.addLayout(self.gridLayout_3)
+
+
+        self.verticalLayout_40.addWidget(self.frame_9)
+
+        self.DownloadInfo_tb = QTextBrowser(self.page_download)
+        self.DownloadInfo_tb.setObjectName(u"DownloadInfo_tb")
+
+        self.verticalLayout_40.addWidget(self.DownloadInfo_tb)
+
+        self.frame_8 = QFrame(self.page_download)
+        self.frame_8.setObjectName(u"frame_8")
+        self.frame_8.setFrameShape(QFrame.StyledPanel)
+        self.frame_8.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_67 = QHBoxLayout(self.frame_8)
+        self.horizontalLayout_67.setObjectName(u"horizontalLayout_67")
+        self.DownloadProgress_pb = ProgressBar(self.frame_8)
+        self.DownloadProgress_pb.setObjectName(u"DownloadProgress_pb")
+        sizePolicy7.setHeightForWidth(self.DownloadProgress_pb.sizePolicy().hasHeightForWidth())
+        self.DownloadProgress_pb.setSizePolicy(sizePolicy7)
+
+        self.horizontalLayout_67.addWidget(self.DownloadProgress_pb)
+
+        self.StartDownload_btn = QPushButton(self.frame_8)
+        self.StartDownload_btn.setObjectName(u"StartDownload_btn")
+        sizePolicy6.setHeightForWidth(self.StartDownload_btn.sizePolicy().hasHeightForWidth())
+        self.StartDownload_btn.setSizePolicy(sizePolicy6)
+        self.StartDownload_btn.setMinimumSize(QSize(150, 30))
+        self.StartDownload_btn.setFont(font9)
+        self.StartDownload_btn.setStyleSheet(u"QPushButton {\n"
+"	border: 2px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"	background-color: rgb(52, 59, 72);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(57, 65, 80);\n"
+"	border: 2px solid rgb(61, 70, 86);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(35, 40, 49);\n"
+"	border: 2px solid rgb(43, 50, 61);\n"
+"}")
+        icon4 = QIcon()
+        icon4.addFile(u":/16x16/icons/16x16/cil-data-transfer-down.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.StartDownload_btn.setIcon(icon4)
+
+        self.horizontalLayout_67.addWidget(self.StartDownload_btn)
+
+
+        self.verticalLayout_40.addWidget(self.frame_8)
+
+        self.stackedWidget.addWidget(self.page_download)
         self.page_widgets = QWidget()
         self.page_widgets.setObjectName(u"page_widgets")
         self.verticalLayout_6 = QVBoxLayout(self.page_widgets)
@@ -2669,10 +2849,10 @@ class Ui_MainWindow(object):
         self.pushButton = QPushButton(self.frame_content_wid_1)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setMinimumSize(QSize(150, 30))
-        font9 = QFont()
-        font9.setFamily(u"Segoe UI")
-        font9.setPointSize(9)
-        self.pushButton.setFont(font9)
+        font10 = QFont()
+        font10.setFamily(u"Segoe UI")
+        font10.setPointSize(9)
+        self.pushButton.setFont(font10)
         self.pushButton.setStyleSheet(u"QPushButton {\n"
 "	border: 2px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
@@ -2686,8 +2866,6 @@ class Ui_MainWindow(object):
 "	background-color: rgb(35, 40, 49);\n"
 "	border: 2px solid rgb(43, 50, 61);\n"
 "}")
-        icon3 = QIcon()
-        icon3.addFile(u":/16x16/icons/16x16/cil-folder-open.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton.setIcon(icon3)
 
         self.gridLayout.addWidget(self.pushButton, 0, 1, 1, 1)
@@ -2783,7 +2961,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 278, 222))
         self.horizontalLayout_11 = QHBoxLayout(self.scrollAreaWidgetContents)
         self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
         self.plainTextEdit = QPlainTextEdit(self.scrollAreaWidgetContents)
@@ -2812,7 +2990,7 @@ class Ui_MainWindow(object):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.setObjectName(u"comboBox")
-        self.comboBox.setFont(font9)
+        self.comboBox.setFont(font10)
         self.comboBox.setAutoFillBackground(False)
         self.comboBox.setStyleSheet(u"QComboBox{\n"
 "	background-color: rgb(27, 29, 35);\n"
@@ -2866,9 +3044,9 @@ class Ui_MainWindow(object):
 "	color: rgb(210, 210, 210);\n"
 "	background-color: rgb(52, 58, 71);\n"
 "}")
-        icon4 = QIcon()
-        icon4.addFile(u":/16x16/icons/16x16/cil-link.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.commandLinkButton.setIcon(icon4)
+        icon5 = QIcon()
+        icon5.addFile(u":/16x16/icons/16x16/cil-link.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.commandLinkButton.setIcon(icon5)
 
         self.gridLayout_2.addWidget(self.commandLinkButton, 1, 6, 1, 1)
 
@@ -2922,25 +3100,40 @@ class Ui_MainWindow(object):
         self.tableWidget.setSizePolicy(sizePolicy)
         palette1 = QPalette()
         palette1.setBrush(QPalette.Active, QPalette.WindowText, brush6)
-        brush12 = QBrush(QColor(39, 44, 54, 255))
-        brush12.setStyle(Qt.SolidPattern)
-        palette1.setBrush(QPalette.Active, QPalette.Button, brush12)
+        brush15 = QBrush(QColor(39, 44, 54, 255))
+        brush15.setStyle(Qt.SolidPattern)
+        palette1.setBrush(QPalette.Active, QPalette.Button, brush15)
         palette1.setBrush(QPalette.Active, QPalette.Text, brush6)
         palette1.setBrush(QPalette.Active, QPalette.ButtonText, brush6)
-        palette1.setBrush(QPalette.Active, QPalette.Base, brush12)
-        palette1.setBrush(QPalette.Active, QPalette.Window, brush12)
+        palette1.setBrush(QPalette.Active, QPalette.Base, brush15)
+        palette1.setBrush(QPalette.Active, QPalette.Window, brush15)
+        brush16 = QBrush(QColor(210, 210, 210, 128))
+        brush16.setStyle(Qt.NoBrush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette.Active, QPalette.PlaceholderText, brush16)
+#endif
         palette1.setBrush(QPalette.Inactive, QPalette.WindowText, brush6)
-        palette1.setBrush(QPalette.Inactive, QPalette.Button, brush12)
+        palette1.setBrush(QPalette.Inactive, QPalette.Button, brush15)
         palette1.setBrush(QPalette.Inactive, QPalette.Text, brush6)
         palette1.setBrush(QPalette.Inactive, QPalette.ButtonText, brush6)
-        palette1.setBrush(QPalette.Inactive, QPalette.Base, brush12)
-        palette1.setBrush(QPalette.Inactive, QPalette.Window, brush12)
+        palette1.setBrush(QPalette.Inactive, QPalette.Base, brush15)
+        palette1.setBrush(QPalette.Inactive, QPalette.Window, brush15)
+        brush17 = QBrush(QColor(210, 210, 210, 128))
+        brush17.setStyle(Qt.NoBrush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush17)
+#endif
         palette1.setBrush(QPalette.Disabled, QPalette.WindowText, brush6)
-        palette1.setBrush(QPalette.Disabled, QPalette.Button, brush12)
+        palette1.setBrush(QPalette.Disabled, QPalette.Button, brush15)
         palette1.setBrush(QPalette.Disabled, QPalette.Text, brush6)
         palette1.setBrush(QPalette.Disabled, QPalette.ButtonText, brush6)
-        palette1.setBrush(QPalette.Disabled, QPalette.Base, brush12)
-        palette1.setBrush(QPalette.Disabled, QPalette.Window, brush12)
+        palette1.setBrush(QPalette.Disabled, QPalette.Base, brush15)
+        palette1.setBrush(QPalette.Disabled, QPalette.Window, brush15)
+        brush18 = QBrush(QColor(210, 210, 210, 128))
+        brush18.setStyle(Qt.NoBrush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush18)
+#endif
         self.tableWidget.setPalette(palette1)
         self.tableWidget.setStyleSheet(u"QTableWidget {	\n"
 "	background-color: rgb(39, 44, 54);\n"
@@ -3138,6 +3331,8 @@ class Ui_MainWindow(object):
         self.lable_devicetype.setText(QCoreApplication.translate("MainWindow", u"\u8bbe\u5907\u7c7b\u578b:", None))
         self.cbb_devicetype.setItemText(0, QCoreApplication.translate("MainWindow", u"USBCAN-I", None))
         self.cbb_devicetype.setItemText(1, QCoreApplication.translate("MainWindow", u"USBCAN-II", None))
+        self.cbb_devicetype.setItemText(2, QCoreApplication.translate("MainWindow", u"USBCAN-2E-U", None))
+        self.cbb_devicetype.setItemText(3, QCoreApplication.translate("MainWindow", u"USBCAN-4E-U", None))
 
         self.label_deviceindex.setText(QCoreApplication.translate("MainWindow", u"\u8bbe\u5907\u7d22\u5f15:", None))
         self.cbb_deviceindex.setItemText(0, QCoreApplication.translate("MainWindow", u"0", None))
@@ -3234,6 +3429,10 @@ class Ui_MainWindow(object):
         self.label_62.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.label_63.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.label_64.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.SelectHexFile_le.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u8bf7\u9009\u62e9\u8981\u4e0b\u8f7d\u7684Hex\u6587\u4ef6", None))
+        self.SelectHexFile_btn.setText(QCoreApplication.translate("MainWindow", u"\u9009\u62e9Hex\u6587\u4ef6", None))
+        self.HexFileInfo_lb.setText("")
+        self.StartDownload_btn.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb\u4e0b\u8f7d", None))
         self.labelBoxBlenderInstalation.setText(QCoreApplication.translate("MainWindow", u"BLENDER INSTALLATION", None))
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Your Password", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Open Blender", None))

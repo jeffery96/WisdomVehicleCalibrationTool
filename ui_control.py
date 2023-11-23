@@ -1,5 +1,7 @@
 from PySide2.QtCore import Qt, QObject, Signal, QPointF
 from PySide2.QtWidgets import QTableWidgetItem
+
+import globalVal
 from zlgcan import ZCAN_Receive_Data
 import time
 from main import *
@@ -9,6 +11,27 @@ class UiControl(QObject):
 
     msg_signal = Signal([ZCAN_Receive_Data])
     TableUpdateSignal = Signal(str, str, str, str, str)
+    DownloadTextBrowserSig = Signal(str)
+    DownloadStartBtnSig = Signal()
+    DownloadProgressBarSetSig = Signal(float)
+
+    class NewFrame:
+        id = None
+        time = None
+        dir = None
+        dlc = None
+        data = None
+        Bytes = None
+
+        def getSignal(self, startbit, len):
+            # 根据开始位和信号长度获取信号
+            # TODO: 使用了字符串操作，可利用纯数值计算减小计算开销
+            data_in_64bits = 0
+            for i, B in enumerate(self.Bytes):
+                data_in_64bits = data_in_64bits + (B << i * 8)
+
+            res = int(bin(data_in_64bits)[::-1][startbit:len][::-1], 2)
+            return res
 
     def __init__(self, mainwindow):
         super().__init__()
@@ -20,6 +43,9 @@ class UiControl(QObject):
     def slotInit(self):
         self.TableUpdateSignal.connect(self.msgTablewDisplay)
         self.msg_signal.connect(self.msgUiDisplay)
+        self.DownloadTextBrowserSig.connect(self.tbDownloadDisplay)
+        self.DownloadStartBtnSig.connect(self.btnDowloadStart)
+        self.DownloadProgressBarSetSig.connect(self.pbDownloadSet)
 
         # info_pte右键菜单初始化
         def infoPteContext():
@@ -103,6 +129,9 @@ class UiControl(QObject):
         self.mw.ui.pb_airpressure2.setMinMaxValue(0, 1)
         self.mw.ui.pb_airpressure2.setUnit('kPa')
 
+        # VCU程序更新页面UI初始化
+        self.mw.ui.DownloadProgress_pb.setUnit('%')
+
     def graphInit(self):
         import pyqtgraph as pg
         import numpy as np
@@ -168,6 +197,9 @@ class UiControl(QObject):
 
         for m in msgs:
             match m.id:
+                case 0x801:
+                    globalVal.Boot_Msg = m.Bytes
+
                 case 0x18FFE6A5:
                     self.data[0].append(m.time / 1e6)
                     self.data[1].append(m.getSignal(0, 2))
@@ -225,27 +257,9 @@ class UiControl(QObject):
             table_row_cnt, 5, QTableWidgetItem(data))
         self.mw.ui.tablew_msgdisplay.scrollToBottom()
 
-    @staticmethod
-    def msgConvert(msg: ZCAN_Receive_Data):
-        class NewFrame:
-            id = None
-            time = None
-            dir = None
-            dlc = None
-            data = None
-            Bytes = None
-
-            def getSignal(self, startbit, len):
-                # 根据开始位和信号长度获取信号
-                # TODO: 使用了字符串操作，可利用纯数值计算减小计算开销
-                data_in_64bits = 0
-                for i, B in enumerate(self.Bytes):
-                    data_in_64bits = data_in_64bits + (B << i * 8)
-
-                res = int(bin(data_in_64bits)[::-1][startbit:len][::-1], 2)
-                return res
-
-        nf = NewFrame()
+    # @staticmethod
+    def msgConvert(self, msg: ZCAN_Receive_Data):
+        nf = self.NewFrame()
         nf.id = msg.frame.can_id
         nf.time = msg.timestamp
         nf.dir = 'Rx'
@@ -283,3 +297,28 @@ class UiControl(QObject):
 
     def pteClearAll(self):
         self.mw.ui.pte_info.clear()
+
+    def tbDownloadDisplay(self, info_str):
+        # self.mw.ui.DownloadInfo_tb.setText(self.mw.ui.DownloadInfo_tb.toPlainText() + info_str)
+        # tb_cursor = self.mw.ui.DownloadInfo_tb.textCursor()
+        # self.mw.ui.DownloadInfo_tb.moveCursor(tb_cursor.End)
+        self.mw.ui.DownloadInfo_tb.append(info_str)
+
+    def btnDowloadStart(self):
+        if self.mw.ui.StartDownload_btn.text() == '开始下载':
+            self.mw.ui.DownloadInfo_tb.clear()
+            self.mw.ui.StartDownload_btn.setText('停止下载')
+            self.mw.ui.StartDownload_btn.setEnabled(True)
+            # 下载过程中禁用导航栏中仪表盘和图标页按钮
+            self.mw.findChild(QPushButton, 'btn_panel').setEnabled(False)
+            self.mw.findChild(QPushButton, 'btn_graph').setEnabled(False)
+
+        else:
+            self.mw.ui.StartDownload_btn.setText('开始下载')
+            self.mw.ui.StartDownload_btn.setEnabled(True)
+            self.mw.findChild(QPushButton, 'btn_panel').setEnabled(True)
+            self.mw.findChild(QPushButton, 'btn_graph').setEnabled(True)
+
+    def pbDownloadSet(self, value):
+        self.mw.ui.DownloadProgress_pb.setValue(value)
+

@@ -412,6 +412,7 @@ class GaugePanel(QWidget):
         w = fm.size(Qt.TextSingleLine, s).width()
         h = fm.size(Qt.TextSingleLine, s).height()
         p.drawText(QRectF(-w / 2, 55, w, h), s)
+        p.restore()
 
     def drawIndicator(self, p):
         p.save()

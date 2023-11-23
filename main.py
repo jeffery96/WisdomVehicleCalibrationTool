@@ -49,6 +49,7 @@ from PySide2.QtWidgets import *
 
 # GUI FILE
 from app_modules import *
+from ui_control import UiControl
 
 
 class MainWindow(QMainWindow):
@@ -56,8 +57,9 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
-        self.can = CAN(mainwindow=self)
+        self.ui_control = UiControl(self)
+        self.can = CAN(mainwindow=self, ui_control=self.ui_control)
+        self.vcu_download = VcuDownload(mainwindow=self, ui_control=self.ui_control)
 
         # PRINT ==> SYSTEM
         print('System: ' + platform.system())
@@ -106,6 +108,12 @@ class MainWindow(QMainWindow):
             "图    表",
             "btn_graph",
             "url(:/16x16/icons/16x16/cil-chart-line.png)",
+            True)
+        UIFunctions.addNewMenu(
+            self,
+            "VCU程序更新",
+            "btn_download",
+            "url(:/16x16/icons/16x16/cil-data-transfer-down.png)",
             True)
         UIFunctions.addNewMenu(
             self,
@@ -196,6 +204,15 @@ class MainWindow(QMainWindow):
                 UIFunctions.selectMenu(
                     btnWidget.styleSheet()))
 
+        # PAGE DOWNLOAD
+        if btnWidget.objectName() == "btn_download":
+            self.ui.stackedWidget.setCurrentWidget(self.ui.page_download)
+            UIFunctions.resetStyle(self, "btn_download")
+            UIFunctions.labelPage(self, "VCU程序更新")
+            btnWidget.setStyleSheet(
+                UIFunctions.selectMenu(
+                    btnWidget.styleSheet()))
+
         # PAGE WIDGETS
         if btnWidget.objectName() == "btn_widgets":
             self.ui.stackedWidget.setCurrentWidget(self.ui.page_widgets)
@@ -204,8 +221,6 @@ class MainWindow(QMainWindow):
             btnWidget.setStyleSheet(
                 UIFunctions.selectMenu(
                     btnWidget.styleSheet()))
-
-
 
     ## ==> END ##
 

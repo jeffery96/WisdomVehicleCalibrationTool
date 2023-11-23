@@ -16,6 +16,8 @@
 
 ## ==> GUI FILE
 from main import *
+import os
+# from main import MainWindow
 
 ## ==> GLOBALS
 GLOBAL_STATE = 0
@@ -74,6 +76,21 @@ class UIFunctions(MainWindow):
             self.ui.frame_size_grip.hide()
             self.ui.btn_maximize_restore.hide()
 
+    ## ==> CLOSE MAINWINDOW
+    ########################################################################
+    def closeMainWindow(self):
+        if self.can._isOpen:
+            # CAN4EU未正确关闭可能导致下次链接不上，需要重新插拔USB，因此需要在主界面关闭时候调用设备关闭函数
+            # 如果设备已打开则关闭设备
+            # 重置设备
+            for can_channel in self.can._can_handle_dict.keys():
+                self.can.ResetCAN(can_channel)
+                print(f'通道{can_channel}关闭')
+
+            # Close Device，关闭设备
+            self.can.CloseDevice(self.can._dev_handle)
+        self.close()
+        os._exit(0)
 
     ## ==> TOGGLE MENU
     ########################################################################
@@ -119,7 +136,7 @@ class UIFunctions(MainWindow):
     def addNewMenu(self, name, objName, icon, isTopMenu):
         font = QFont()
         font.setFamily(u"Segoe UI")
-        button = QPushButton(str(count),self)
+        button = QPushButton(str(count), self)
         button.setObjectName(objName)
         sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         sizePolicy3.setHorizontalStretch(0)
@@ -238,7 +255,7 @@ class UIFunctions(MainWindow):
         self.ui.btn_maximize_restore.clicked.connect(lambda: UIFunctions.maximize_restore(self))
 
         ## SHOW ==> CLOSE APPLICATION
-        self.ui.btn_close.clicked.connect(lambda: self.close())
+        self.ui.btn_close.clicked.connect(lambda: UIFunctions.closeMainWindow(self))
 
 
     ########################################################################
